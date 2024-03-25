@@ -1,0 +1,217 @@
+\begin{definition}
+    The principal value of the function $\frac{1}{x}$ is denoted as $p.v. \frac{1}{x}$. We define $\omega_0 = p.v. \frac{1}{x}$ as follows: For $\varphi \in S(\mathbb{R})$ (functions in the Schwartz space), we have
+
+$$\omega_0(\varphi) = \lim_{\varepsilon \rightarrow 0} \int_{|x| > \varepsilon} \frac{\varphi(x)}{x} \, dx$$
+\end{definition}
+\begin{proposition}
+     $\omega_0 \in S'$, which means $\omega_0$ is a tempered distribution.
+\end{proposition}
+\begin{proof}
+    $$\begin{aligned}
+\omega_0(\varphi) &= \lim_{\varepsilon \rightarrow 0} \left( \int_{\varepsilon < |x| \leq 1} \frac{\varphi(x)}{x} \, dx + \int_{|x| \geq 1} \frac{\varphi(x)}{x} \, dx \right) \\
+&= \lim_{\varepsilon \rightarrow 0} \left( \int_{\varepsilon < |x| \leq 1} \frac{\varphi(x) - \varphi(0)}{x} \, dx + \int_{|x| \geq 1} \frac{\varphi(x)}{x} \, dx \right)
+\end{aligned}$$Since $\left| \frac{\varphi(x) - \varphi(0)}{x} \right| \leq \|\varphi'\|_\infty$, by the Dominated Convergence Theorem (DCT), we obtain
+
+$$\begin{aligned}
+|\omega_0(\varphi)| &\leq \int_{\mathbb{R}} \left| \frac{\varphi(x) - \varphi(0)}{x} \right| \, dx + \int_{|x| \geq 1} \left| \frac{\varphi(x)}{x} \right| \, dx \\
+&\leq 2\|\varphi'\|_\infty + \int_{|x| \geq 1} \left| \frac{x \varphi(x)}{x^2} \right| \, dx \\
+&\leq 2\|\varphi'\|_\infty + 2\|x \varphi(x)\|_\infty
+\end{aligned}$$Therefore, $\omega_0 \in S'$.
+\end{proof}
+\begin{definition}
+    For $f \in S(\mathbb{R})$, the Truncated Hilbert Transform (at height $\epsilon$) is defined as
+    $$H^{(\varepsilon)}(f)(x) = \frac{1}{\pi} \int_{|y| \geq \varepsilon} \frac{f(x-y)}{y} \, dy = \frac{1}{\pi} \int_{|x-y| > \varepsilon} \frac{f(y)}{x-y} \, dy$$
+    The Hilbert Transform is then defined as
+    $$Hf(x) = \frac{1}{\pi} (w_0 * f)(x) = \lim_{\varepsilon \rightarrow 0} H^{(\varepsilon)}(f)(x)$$
+\end{definition}
+\noindent\textbf{Note}. The convolution $\omega_0 * f(x)$ can be expressed as $\omega_0(\tau_x \tilde{f})$, where $\tau_x \tilde{f}(y) = \tilde{f}(y-x)$, i.e.,
+
+$$\omega_0 * f(x) = \lim_{\varepsilon \rightarrow 0} \int_{|y| > \varepsilon} \frac{\tau_x \tilde{f}(y)}{y} \, dy = \lim_{\varepsilon \rightarrow 0} \int_{|y| > \varepsilon} \frac{f(x-y)}{y} \, dy$$
+Alternatively, the Hilbert Transform can also be represented as
+
+$$Hf(x) = \frac{1}{\pi} p.v. \int_{-\infty}^{+\infty} \frac{f(x-y)}{y} \, dy = \frac{1}{\pi} p.v. \int_{-\infty}^{+\infty} \frac{f(y)}{x-y} \, dy$$
+\begin{rmk}
+    If we use $\lim_{\varepsilon \rightarrow 0} \int_{|y| > \varepsilon} \frac{f(x-y)}{y} \, dy$ to define the Hilbert Transform , its definition can be naturally extended to a broader class of functions. Given $x \in \mathbb{R}$, $Hf(x)$ is defined for all integrable functions $f$ on $\mathbb{R}$ that satisfy the Hölder condition near $x$, i.e., there exist $C_x, \varepsilon_x > 0$ such that $|f(x) - f(y)| \leq C_x |x-y|^{\varepsilon_x}$ whenever $|y-x| < \delta_x$.
+
+For piecewise smooth integrable functions, the Hilbert Transform is well-defined at the Hölder-Lipschitz continuous points of the function.
+\end{rmk} 
+\begin{proposition}
+    $\left(\frac{1}{\pi} p.v. \frac{1}{x}\right)^{\wedge}(\xi) $ is coincide with $ -i \, \text{sgn}(\xi)$ i.e,  $$\left(\frac{1}{\pi} p.v. \frac{1}{x}\right)^{\wedge}(\varphi) = \int (-i \, \text{sgn}(\xi)) \varphi(\xi) \, d\xi$$.
+\end{proposition}
+\begin{proposition}
+    $\widehat{Hf}(\xi) $ is coincide with $ -i \, \text{sgn}(\xi) \hat{f}(\xi)$ for $f \in S(\mathbb{R})$ i.e, for all $\varphi \in S(\mathbb{R})$, we have
+
+$$\widehat{Hf}(\varphi) = \int_{\mathbb{R}} -i \, \text{sgn}(\xi) \hat{f}(\xi) \varphi(\xi) \, d\xi.$$
+\end{proposition}
+\begin{proof}
+    In fact, $\widehat{Hf}(\varphi) = Hf(\hat{\varphi}) = \frac{1}{\pi}(\omega_0 * f)(\hat{\varphi})$ can be further derived as:
+
+$$\begin{aligned}
+&= \frac{1}{\pi} \omega_0(\tilde{f} * \hat{\varphi}) = \frac{1}{\pi} \omega_0(\widehat{\hat{f}}) \\
+&= \frac{1}{\pi} \omega_0(\hat{f} \varphi) \\
+&= \int_{\mathbb{R}} -i \, \text{sgn}(\xi) \hat{f}(\xi) \varphi(\xi) \, d\xi.
+\end{aligned}$$
+this is what we desired.
+\end{proof}
+We consider $\widehat{Hf}(\xi)$ as a function and identify $\hat{H} \in S'$ with the function $-i \, \text{sgn}(\xi) \hat{f}(\xi)$. Therefore, for $f \in S$, we have $\|\hat{Hf}\|_2 = \|\hat{f}\|_2$.
+
+Using this isometric property, we can extend the definition of the Hilbert Transform to $L^2(\mathbb{R})$. If $f \in L^2(\mathbb{R})$, then $-i \, \text{sgn}(\xi) \hat{f}(\xi) \in L^2$. We define $Hf(x) = (-i \, \text{sgn}(\xi) \hat{f}(\xi))^\vee(x)$. If $f \in L^2$ and there exists a sequence $\{f_n\} \subset S$ converging to $f$ in $L^2$, then $\{\hat{Hf_m}\}$ is a Cauchy sequence in $L^2$ and thus converges to a function in $L^2$.
+For $f$ in $L^2$, we can define its Hilbert transform via $g \in L^2$ where $\hat{g} = \lim_{{m \to \infty}} \widehat{H f_m}$ in $L^2$.
+
+\begin{theorem}\label{thm3.1.6}
+    For $f \in S(\mathbb{R})$,\\
+(1) $H$ is of weak type $(1,1)$, i.e., $m\{x \in \mathbb{R}: |H f(x)| > \lambda\} \leqslant \frac{c}{\lambda} \|f\|_1$;\\
+(2) $H$ is of strong type $(p, p)$ for $1 < p < \infty$, i.e., $\|H f\|_p \leqslant C_p \|f\|_p$.
+\end{theorem} 
+\begin{rmk}
+    (1) As $p \to \infty$, $C_p = O(p)$; as $p \to 1$, $C_p = O\left(\frac{1}{p-1}\right)$;\\
+(2) If $f = \chi_{[0,1]}$, then $H f(x) = \frac{1}{\pi} \log \left|\frac{x}{x-1}\right|$. Note that while $f \in L^1$, $H f \notin L^1$ and similarly, while $f \in L^{\infty}$, $H f \notin L^{\infty}$.
+\end{rmk}
+\begin{lemma}[The Calderon-Zygmund Decomposition in $L^{1}\left(\mathbb{R}^n\right)$]
+    Let $f \in L^{\prime}\left(\mathbb{R}^n\right)$ and $\lambda > 0$. Then $f$ can be decomposed as $f = g + b$ where $|g| \leqslant \lambda$ a.e. and $b = \sum_Q x_Q f$. The summation is over a collection $B = \{Q\}$ of disjoint cubes, and for each $Q$, $\lambda < \frac{1}{|Q|} \int_Q |f(x)| dx \leqslant 2^n \lambda $ (\ding{172}). Furthermore, $m\left(\cup_{Q \in B} Q\right) < \frac{1}{\lambda} \|f\|_1$ (\ding{173}).
+\end{lemma}
+\begin{proof}
+For each $l \in \mathbb{Z}$, define a collection of dyadic cubes $D_l$ as follows:
+$$
+D_l = \left\{ \prod_{i=1}^n \left[ 2^l m_i, 2^l (m_i + 1) \right) : m_1, \ldots, m_n \in \mathbb{Z} \right\}
+$$
+Observe that if $Q \in D_l$ and $Q' \in D_{l'}$, then either $Q \cap Q' = \emptyset$, $Q \subset Q'$, or $Q' \subset Q$.
+Choose $l_0$ large enough so that for each $Q \in D_{l_0}$ satisfies $\frac{1}{|Q|} \int_Q |f(x)| dx \leq \lambda$.
+For each such cube, consider its $2^n$ "children" (or subcube) with side length $2^{l_0 - 1}$.
+Each subcube $Q'$ will have one of the following properties:
+\begin{equation}\label{3.1}
+    \frac{1}{|Q'|} \int_{Q'} |f(x)| dx \leqslant \lambda \quad \text{or} \quad \frac{1}{|Q'|} \int_{Q'} |f(x)| dx > \lambda
+\end{equation}
+In the latter case, we stop and include $Q'$ in the collection $B$.
+Observe that in this case,
+$$
+\frac{1}{|Q'|} \int_{Q'} |f(x)| dx \leqslant \frac{2^n}{|Q|} \int_Q |f(x)| dx \leqslant 2^n \lambda
+$$
+Let $Q$ denote the parent cube of $Q'$. Therefore, (\ding{172}) holds. If the first inequality in \eqref{3.1} is satisfied, then further subdivide $Q'$ into its child cubes, each with half the side length of $Q'$. Continuing this process yields a collection of disjoint dyadic cubes $B$ that satisfy (\ding{172}). Consequently, (\ding{173}) also holds because
+$$
+\left|\bigcup_{Q \in B} Q\right| \leq \sum_{Q \in B}|Q| < \sum_{Q \in B} \frac{1}{\lambda} \int_Q |f(x)| dx = \frac{1}{\lambda} \int_{\bigcup Q} |f(x)| dx \leq \frac{1}{\lambda} \|f\|_1.
+$$
+Now, consider a point $x_0 \in \mathbb{R}^n \setminus \bigcup_{Q \in B} Q$. Such an $x_0$ is contained in a decreasing sequence of dyadic cubes $\left\{Q_i\right\}$, each satisfying $\frac{1}{\left|Q_j\right|} \int_{Q_j} |f| \leq \lambda$.
+By Lebesgue's theorem, for such an $x_0$, we have $\left|f\left(x_0\right)\right| \leq \lambda$ almost everywhere.
+
+Define $g = f - b = f - \sum_{Q \in B} x_Q f = 1_{\mathbb{R}^n \setminus \bigcup_{Q \in B}} f$. Since $\mathbb{R}^n \setminus \bigcup_{Q \in B} Q$ and $\mathbb{R}^n \setminus \bigcup_{Q \in \bar{Q}} Q$ differ only by a set of measure zero, it follows that $|g| \leq \lambda$ almost everywhere, as desired.
+\end{proof}
+\noindent\textbf{Proof of boundedness of $H$ (Theorem \ref{thm3.1.6})}:\\
+(1) Fix $\lambda > 0$. Using the $C-Z$ decomposition, there exist disjoint intervals $\left\{I_j\right\}$ such that
+$$
+|f| \leq \lambda \text{ a.e. } x \notin \Omega = \bigcup_j I_j, \quad \lambda < \frac{1}{\left|I_j\right|} \int_{I_j} |f(x)| dx \leq 2\lambda, \quad |\Omega| \leq \frac{1}{\lambda} \|f\|_1.
+$$
+Decompose $f$ as $f = g + b$, where
+$$
+g(x) = \begin{cases} 
+f(x) & x \notin \Omega \\
+\frac{1}{\left|I_j\right|} \int_{I_j} f(x) dx & x \in I_j, j \in \mathbb{N}
+\end{cases}
+$$
+and $b(x) = \sum_j b_j(x)$ with $b_j(x) = \left(f(x) - \frac{1}{\left|I_j\right|} \int_{I_j} f(x) dx\right) \textbf{1}_{I_j}(x)$. Then $|g(x)| \leq 2\lambda$ almost everywhere, and each $b_j$ is supported on $I_j$ with $\int_{I_j} b_j (x) dx = 0$.
+
+Since $f = g + b$, we have $H f = H g + H b$. Consequently,
+$$
+\left|\left\{x: |H f(x)| > \lambda\right\}\right| \leq \left|\left\{x: |H g(x)| > \frac{\lambda}{2}\right\}\right| + \left|\left\{x: |H b(x)| > \frac{\lambda}{2}\right\}\right|.
+$$
+For the first term, we have
+$$
+\begin{aligned}
+\left|\left\{x: |Hg(x)| > \frac{\lambda}{2}\right\}\right| &\leqslant \frac{1}{(\lambda/2)^2} \int |Hg(x)|^2 dx = \frac{4}{\lambda^2} \int |g(x)|^2 dx \\
+&\leqslant \frac{4}{\lambda^2} \left( \int |g(x)| dx \right)^2 \leqslant \frac{4}{\lambda^2} \left( \int |f(x)| dx \right)^2 \\
+&\leqslant \frac{4}{\lambda^2} \|f\|_1^2 < \infty \quad \text{(Since } f \in L^1 \subset L^2\text{)}
+\end{aligned}
+$$
+Let $2I_j$ be the interval with the same center as $I_j$ and twice the length, and let $\Omega^* = \bigcup_j 2I_j$. Then $|\Omega^*| \leq 2|\Omega|$ and
+$$
+\begin{aligned}
+\left|\left\{x: |Hb(x)| > \frac{\lambda}{2}\right\}\right| &\leq |\Omega^*| + \left|\left\{x \notin \Omega^*: |Hb(x)| > \frac{\lambda}{2}\right\}\right| \\
+&\leq 2|\Omega| + \frac{2}{\lambda} \int_{\mathbb{R} \setminus \Omega^*}|Hb(x)| dx \\
+&\leq \frac{2}{\lambda}\|f\|_1 + \frac{2}{\lambda} \int_{\mathbb{R} \setminus \Omega^*}|Hb(x)| dx
+\end{aligned}
+$$
+Note that
+$$
+\begin{aligned}
+\int_{\mathbb{R} \setminus \Omega^*}|Hb(x)| dx &\leq \int_{\mathbb{R} \setminus \Omega^*}\left|\sum_j Hb_j(x)\right| dx \leq \sum_j \int_{\mathbb{R} \setminus \Omega^*}|Hb_j(x)| dx \\
+&\leq \sum_j \int_{\mathbb{R} \setminus 2I_j}|Hb_j(x)| dx
+\end{aligned}
+$$
+and
+$$
+\begin{aligned}
+\int_{\mathbb{R} \setminus 2I_j}|Hb_j(x)| dx &= \int_{\mathbb{R} \setminus 2I_j} \lim_{\varepsilon \rightarrow 0} \left| \int_{\substack{|x-y|>\varepsilon \\ y \in I_j}} \frac{b_j(y)}{x-y} dy \right| dx \\
+&= \int_{\mathbb{R} \setminus 2I_j} \left| \int_{I_j} b_j(y) \left( \frac{1}{x-y} - \frac{1}{x-c_j} \right) dy \right| dx
+\end{aligned}
+$$
+where $c_j$ is the center of $I_j$ and $\int_{\mathbb{R}} b_j(x) dx = 0$. Since $|y -c_j| \leq \frac{1}{2} |I_j|$ and $|x-y| \geq \frac{1}{2} |x-c_j|$, then,
+$$
+\begin{aligned}
+\int_{\mathbb{R} \setminus 2I_j} \left| \int_{I_j} b_j(y) \left( \frac{1}{x-y} - \frac{1}{x-c_j} \right) dy \right| dx &\leq \int_{I_j} |b_j(y)| \int_{\mathbb{R} \setminus 2I_j} \frac{|y-c_j|}{|x-y||x-c_j|} dx dy \\
+&\leq \int_{I_j} |b_j(y)| \int_{\mathbb{R} \setminus 2I_j} \frac{|I_j|}{|x-c_j|^2} dx dy \\
+&= 2 \int_{I_j} |b_j(y)| dy
+\end{aligned}
+$$
+Thus,
+\[  
+\sum_j \int_{\mathbb{R}^{2I_j}} |Hb_j(x)| \, dx \leqslant 2 \sum_j \int_{I_j} |b_j(x)| \, dx \leqslant 4 \sum_j \int_{I_j} |f(x)| \, dx \leqslant 4\|f\|_1.  
+\]  
+Then, we can show that  
+\[  
+\left|\left\{ x : |Hb(x)| > \frac{\lambda}{2} \right\}\right| \leq \frac{10}{\lambda}\|f\|_1,  
+\]  
+which proves the weak type $(1,1)$ estimate. \\ 
+  
+(2) $H$ is of weak type $(1,1)$ and strong type $(2,2)$ (since $\|Hf\|_2 = \|f\|_2$). Hence, by interpolation, it is also of strong type $(p,p)$ for $1 < p < 2$.  
+If $2 < p < \infty$, then $p' < 2$. Consider the following estimate:  
+\[  
+\begin{aligned}  
+\|Hf\|_p &= \sup \left\{ \left| \int_{\mathbb{R}^n} Hf \cdot g \, dx \right| : g \in C_c^{\infty}, \|g\|_{p'} \leq 1 \right\} \\  
+&= \sup \left\{ \left| -\int_{\mathbb{R}^n} f \cdot Hg \right| : g \in C_c^{\infty}, \|g\|_{p'} \leq 1 \right\}.  
+\end{aligned}  
+\]  
+For $f , g \in S(\mathbb{R})$, we have  
+\[  
+\int_{\mathbb{R}^n} Hf \cdot g = \int_{\mathbb{R}^n} Hf(\tilde{g})^{\wedge} = \int_{\mathbb{R}^n} \hat{H}_f \tilde{g} = \int_{\mathbb{R}^n} -i \operatorname{sgn}(\xi) \hat{f}(\xi) \hat{g}(\xi) \, d\xi.  
+\]  
+Furthermore, by a change of variables ($\eta = -\xi$), we obtain  
+\[  
+\begin{aligned}  
+&\phantom{{}={}} \int_{\mathbb{R}^n} -i \operatorname{sgn}(\xi) \hat{f}(\xi) \hat{g}(\xi) \, d\xi \\  
+&= -\int_{\mathbb{R}^n} i \operatorname{sgn}(\eta) \hat{f}(\eta) \hat{g}(\eta) \, d\eta \\  
+&= -\int_{\mathbb{R}^n} \hat{f}(\eta) H\hat{g}(\eta) \, d\eta \\  
+&= -\int_{\mathbb{R}^n} (\hat{f})^{\wedge} Hg \\  
+&= -\int_{\mathbb{R}^n} f \cdot Hg.  
+\end{aligned}  
+\]  
+Using Holder's Inequality, we have  
+\[  
+\|Hf\|_p \leqslant C\|f\|_p \sup \left\{ \|g\|_{p'} : g \in C_c^{\infty}, \|g\|_{p'} \leq 1 \right\} \leqslant C\|f\|_p.  
+\]  
+\begin{rmk}
+    We can extend the Hilbert transform to functions in $L^p$ space. For $1 \leq p < \infty$ and any $f \in L^p$, there exists a sequence $\{f_k\} \subset S$ such that $f_k \rightarrow f$ in $L^p$. Since  
+\[  
+\|Hf_m - Hf_n\|_p \leq C\|f_m - f_n\|_p \rightarrow 0  
+\]  
+as $m, n \rightarrow \infty$, the sequence $\{Hf_m\}$ is Cauchy in $L^p$ and converges to some $g = Hf$.
+\end{rmk}
+~\
+Another similar example is the \textbf{Riesz transform}.
+\begin{definition}
+    For $\varphi \in \mathcal{S}(\mathbb{R}^n)$ and $w_j \in \mathcal{S}'$, let
+\[
+\left\langle w_j, \varphi \right\rangle = \frac{\Gamma\left(\frac{n+1}{2}\right)}{\pi^{\frac{n+1}{2}}} \lim_{\varepsilon \rightarrow 0} \int_{|y| \geqslant \varepsilon} \frac{y_j}{|y|^{n+1}} \varphi(y) \, dy.
+\]
+and for $1 \leq j \leq n$, the \textbf{j-th Riesz transform} of $f$ is given by
+\[
+R_j(f)(x) = (w_j * f)(x) = \frac{\Gamma\left(\frac{n+1}{2}\right)}{\pi^{\frac{n+1}{2}}} \, \text{p.v.} \int_{\mathbb{R}^n} \frac{x_j-y_j}{|x-y|^{n+1}} f(y) \, dy, \quad \forall f \in \mathcal{S}(\mathbb{R}^n),
+\]
+where p.v. denotes the principal value integral.
+\end{definition}
+\begin{rmk}
+    The definition makes sense for any integrable function that satisfies the following property: for all $x$, there exist constants $C_x > 0$, $\varepsilon_x > 0$, and $\delta_x > 0$ such that
+\[
+|f(x) - f(y)| \leqslant C_x |x-y|^{\varepsilon_x}
+\]
+whenever $|x-y| < \delta_x$.
+\end{rmk}

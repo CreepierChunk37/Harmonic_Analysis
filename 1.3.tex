@@ -1,0 +1,149 @@
+\begin{definition}
+    Let $\varphi$ be a function belonging to $L^{\prime}\left(\mathbb{R}^n\right)$, the dual space of Lebesgue integrable functions on $\mathbb{R}^n$, satisfying $\int_{\mathbb{R}^n} \varphi(x) \, dx = 1$. Define $\varphi_{\varepsilon}(x) = \varepsilon^{-n} \varphi\left(\frac{x}{\varepsilon}\right)$ for $\varepsilon > 0$. The family of functions $\left\{\varphi_{\varepsilon}\right\}_{\varepsilon > 0}$ is known as an approximation to the identity.
+\end{definition}
+\begin{theorem}
+    Suppose $\left\{\varphi_{\varepsilon}\right\}_{\varepsilon > 0}$ is an approximation to the identity. Then for any function $f$ in $L^p(\mathbb{R}^n)$ with $1 \leq p < \infty$, we have
+
+$$\lim_{\varepsilon \to 0} \left\|\varphi_{\varepsilon} * f - f\right\|_p = 0$$where $*$ denotes convolution.
+\end{theorem}
+\begin{rmk}
+    There exists a sequence $\{\varepsilon_k\}_{k \in \mathbb{N}}$ converging to 0 as $k \to \infty$ such that $\varphi_{\varepsilon_k} * f(x) = f(x)$ almost everywhere.
+\end{rmk}
+\begin{proof}
+    Since $\int_{\mathbb{R}^n} \varphi(x) \, dx = 1$, we can write
+
+$$\varphi_{\varepsilon} * f(x) - f(x) = \int_{\mathbb{R}^n} \varphi(y) [f(x - \varepsilon y) - f(x)] \, dy$$Given $\tilde{\varepsilon} > 0$, choose $\delta > 0$ such that if $|h| < \delta$, then $\|f(t + h) - f(t)\| < \frac{\tilde{\varepsilon}}{2\|\varphi\|_1}$. For this fixed $\delta$, if $\varepsilon$ is sufficiently small, then
+
+$$\int_{|y| \geq \frac{\delta}{\varepsilon}} |\varphi(y)| \, dy \leq \frac{\tilde{\varepsilon}}{4\|f\|_p}$$Using Minkowski's integral inequality, we have
+
+$$\begin{aligned}
+\left\|\varphi_{\varepsilon} * f - f\right\|_p &\leq \int_{\mathbb{R}^n} |\varphi(y)| \|f(x - \varepsilon y) - f(x)\|_{L^p} \, dy \\
+&< \int_{|y| < \frac{\delta}{\varepsilon}} |\varphi(y)| \|f(x - \varepsilon y) - f(x)\|_{L^p} \, dy + 2\|f\|_p \int_{|y| \geq \frac{\delta}{\varepsilon}} |\varphi(y)| \, dy \\
+&\leq \frac{\tilde{\varepsilon}}{2\|\varphi\|_1} \cdot \|\varphi\|_1 + 2\|f\|_p \cdot \frac{\tilde{\varepsilon}}{4\|f\|_p} = \tilde{\varepsilon}
+\end{aligned}$$
+\end{proof}
+\begin{definition}[Schwartz Space $S(\mathbb{R}^n)$]
+    The Schwartz space $S(\mathbb{R}^n)$ is defined as the set of all infinitely differentiable functions $f$ on $\mathbb{R}^n$ such that for any multi-indices $\alpha$ and $\beta$, the supremum
+$\sup_{x \in \mathbb{R}^n} |x^\alpha D^\beta f(x)|$
+is finite. Here, $x^\alpha = x_1^{\alpha_1} x_2^{\alpha_2} \cdots x_n^{\alpha_n}$ and $D^\beta = \partial_{x_1}^{\beta_1} \partial_{x_2}^{\beta_2} \cdots \partial_{x_n}^{\beta_n}$, where $x = (x_1, x_2, \ldots, x_n) \in \mathbb{R}^n$ and $\alpha, \beta \in \mathbb{N}^n$.
+\end{definition}
+As an example, the function $f(x) = e^{-|x|^2}$ belongs to $S(\mathbb{R}^n)$.
+If $f$ belongs to the Schwartz space $S$, then for any multi-index $\alpha$, the function $D^\alpha(x^\beta f)$ also belongs to $S$.
+\begin{proposition}
+    If $f \in S(\mathbb{R}^n)$, then for any multi-index $\beta$ and any natural number $N$, there exists a constant $C_{N, \beta}$ such that
+$|D^\beta f(x)| \leqslant \frac{C_{N, \beta}}{(1 + |x|)^N}.$
+As a consequence, $D^\beta f$ belongs to $L^p$ for all $p \geqslant 1$.
+\end{proposition}
+\begin{proposition}
+Let $\varphi \in L^{\prime}\left(\mathbb{R}^n\right)$ with $\int \varphi = 1$, and define $\varphi_{\varepsilon}(x) = \varepsilon^{-n} \varphi\left(\varepsilon^{-1} x\right)$. Then, for all $f \in S\left(\mathbb{R}^n\right)$,
+
+$$\lim_{\varepsilon \rightarrow 0} (f * \varphi_{\varepsilon})(x) = f(x).$$
+\end{proposition}
+\begin{proof}
+     Consider the convolution $f * \varphi_{\varepsilon}(x) = \int f(x - \varepsilon y) \varphi(y) dy$. We have the estimate
+
+$$|f(x - \varepsilon y) \varphi(y)| \leqslant \|f\|_{\infty}|\varphi(y)|,$$
+which belongs to $L^{\prime}$ since $\varphi \in L^{\prime}\left(\mathbb{R}^n\right)$ and $f$ is bounded. Therefore, by the Dominated Convergence Theorem (DCT),
+$$\lim_{\varepsilon \rightarrow 0} (f * \varphi_{\varepsilon})(x) = \int f(x) \varphi(y) dy = f(x) \int \varphi(y) dy = f(x),$$
+as desired.
+\end{proof}
+\begin{theorem}
+    Let $\varphi \in L^{1}$ with $\int \varphi=1$, and define $\varphi_{\varepsilon}(x)=\varepsilon^{-n} \varphi(\varepsilon^{-1} x)$ and $\psi(x)=\sup _{|y| \geqslant|x|}|\varphi(y)|$ (the least decreasing radial majorant of $\varphi$). Suppose that $\psi \in L^{1}$. Then,
+
+(1) For all $f \in L^p(\mathbb{R}^n)$ with $1 \leqslant p \leqslant \infty$, we have $\sup_{\varepsilon>0}|f * \varphi_{\varepsilon}(x)| \leqslant A Mf(x)$ almost everywhere, where $A=\int_{\mathbb{R}^n} \psi(x) dx$ and $Mf$ is the Hardy-Littlewood maximal function of $f$.
+
+(2) For all $f \in L^p$ with $1 \leqslant p < \infty$, we have $\lim_{\varepsilon \rightarrow 0} f * \varphi_{\varepsilon}(x)=f(x)$ almost everywhere. (This is known as differentiation of the approximation to identity.)
+\end{theorem}
+\begin{proof}
+    
+
+
+(1) It suffices to show that $\sup_{\varepsilon>0}|f_1 * \psi_{\varepsilon}(x)| \leqslant \|\psi\|_1 Mf(x)$ for any radial decreasing function $\psi \in L^1(\mathbb{R}^n)$ (i.e., $\psi(x) \leqslant \psi(y)$ if $|x| > |y|$).
+
+\textbf{Step 1:} Assume first that $\psi$ is a simple function, say $\psi(x)=\sum_{j=1}^m b_j \chi_{R_j}(x)$ where $\{R_j\}$ are annuli centered at the origin and $\{b_j\}$ are distinct positive numbers with $b_1 > \cdots > b_m$. We can write
+
+$$\psi(x) = \sum_{j=1}^m (b_j - b_{j+1}) \chi_{B_j}(x)$$where $B_j$ are concentric balls centered at the origin, $B_j = \{x: |x| \leqslant r_j\}$ for some $r_j$, and $b_{m+1}=0$. Let $a_j = b_j - b_{j+1} > 0$ for $j=1,\ldots,m-1$ and $a_m = b_m > 0$. Then,
+
+$$\int \psi(x) dx = \sum_{j=1}^m a_j |B_j|.$$Now,
+
+$$|f| * \psi(x) = \int |f|(x-y) \psi(y) dy = \sum_{j=1}^m a_j \int_{B_j} |f|(x-y) dy \leqslant Mf(x) \sum_{j=1}^m a_j |B_j| = \|\psi\|_1 Mf(x).$$
+
+\textbf{Step 2:} For a general radial decreasing function $\psi \in L^1(\mathbb{R}^n)$, there exists a sequence of simple functions $\{\psi_k\}$ as in Step 1 such that $0 \leqslant \psi_1 \leqslant \cdots \leqslant \psi_k \leqslant \cdots$ and $\psi_k \leqslant \psi$ for all $k \in \mathbb{N}$, with $\psi(x) = \lim_{k \rightarrow \infty} \psi_k(x)$. Clearly, $\|\psi_k\|_1 \leqslant \|\psi\|_1$ for all $k$. By Fatou's Lemma, we have
+
+$$\begin{aligned}
+    |f| * \psi(x) = \int |f|(x-y) \lim_{k \rightarrow \infty} \psi_k(y) dy &\leqslant \liminf_{k \rightarrow \infty} \int |f|(x-y) \psi_k(y) dy \\
+    &\leqslant \liminf_{k \rightarrow \infty} \|\psi_k\|_1 Mf(x)\\
+    &\leqslant \|\psi\|_1 Mf(x).
+\end{aligned}$$
+
+\textbf{Step 3:} Replace $\psi$ in Step 2 by $\psi_{\varepsilon}$ to get
+
+$$|f| * \psi_{\varepsilon}(x) \leqslant \|\psi_{\varepsilon}\|_1 Mf(x) = \|\psi\|_1 Mf(x).$$Taking the supremum over $\varepsilon > 0$ completes the proof of part (1).
+
+(2) For $1 \leqslant p < \infty$, it is known that $\lim_{\varepsilon \rightarrow 0} \|f * \varphi_{\varepsilon} - f\|_p = 0$, which implies that $\lim_{\varepsilon_k \rightarrow 0} f * \varphi_{\varepsilon_k}(x) = f(x)$ almost everywhere for any sequence $\{\varepsilon_k\}$ converging to 0. It remains to show that $\lim_{\varepsilon \rightarrow 0} f * \varphi_{\varepsilon}(x)$ exists almost everywhere.
+
+Define $\Omega f(x) = |\limsup_{\varepsilon \rightarrow 0} f * \varphi_{\varepsilon}(x) - \liminf_{\varepsilon \rightarrow 0} f * \varphi_{\varepsilon}(x)|$. If $f \in S(\mathbb{R}^n)$ (the Schwartz space), then $\lim_{\varepsilon \rightarrow 0} f * \varphi_{\varepsilon}(x) = f(x)$ for all $x \in \mathbb{R}^n$, so $\Omega f(x) \equiv 0$. For a general $f \in L^p$ with $1 \leqslant p < \infty$, we can write $f = f_1 + f_2$ where $f_1 \in S(\mathbb{R}^n)$ and $\|f_2\|_p$ is arbitrarily small，since the Schwartz space is densely embedded in the $L^p$ space. Then,
+
+$$\Omega f(x) \leqslant \Omega f_1(x) + \Omega f_2(x) = \Omega f_2(x) \leqslant 2A Mf_2(x).$$Therefore,
+
+$$|\{x: \Omega f(x) \geqslant \varepsilon\}| \leqslant |\{x: Mf_2(x) > \frac{\varepsilon}{2A}\}| \leqslant C \left(\frac{\|f_2\|_p}{\varepsilon / 2A}\right)^p.$$Since $\|f_2\|_p$ can be made arbitrarily small, we conclude that $|\{x: \Omega f(x) > \varepsilon\}| = 0$ for all $\varepsilon > 0$, and hence $|\{x: \Omega f(x) > 0\}| = 0$. This completes the proof of part (2) for $1 \leqslant p < \infty$.
+
+For $p = \infty$, fix any ball $B$ and let $B_1$ be a larger ball containing $B$ with $\delta$ the distance from $B$ to $\mathbb{R}^n \setminus B_1$. Write $f = f_1 + f_2$ where $f_1 = f \chi_{B_1}$ and $f_2 = f - f_1$. Then $f_1 \in L^1$ and for $x \in B$, we have
+
+$$|f_2 * \varphi_{\varepsilon}(x)| = \left|\int f_2(x-y) \varphi_{\varepsilon}(y) dy\right| \leqslant \|f\|_{\infty} \int_{|y| \geqslant \delta} |\varphi_{\varepsilon}(y)| dy = \|f\|_{\infty} \int_{|y| \geqslant \delta/\varepsilon} |\varphi(y)| dy \rightarrow 0$$as $\varepsilon \rightarrow 0$. Since $\lim_{\varepsilon \rightarrow 0} f_1 * \varphi_{\varepsilon}(x) = f_1(x)$ almost everywhere, we conclude that $\lim_{\varepsilon \rightarrow 0} (f_1 + f_2) * \varphi_{\varepsilon}(x) = f_1(x) = f(x)$ for almost every $x \in B$. This completes the proof of part (2) for $p = \infty$.
+\end{proof}
+\begin{theorem}
+    Let $\left\{T_\varepsilon\right\}$ be a family of linear operators mapping from $L^p\left(\mathbb{R}^n\right)$ into the space of measurable functions from $\mathbb{R}^n$ to $\mathbb{C}$. Define the operator $T^*$ as $T^* f(x)=\sup _{\varepsilon>0}\left|T_{\varepsilon} f(x)\right|$. If $T^*$ is of weak type $(p, q)$, then the set $\left\{f \in L^p\left(\mathbb{R}^n\right): \lim _{\varepsilon \rightarrow \varepsilon_0} T_{\varepsilon} f(x)=f(x) \text{ almost everywhere}\right\}$ is closed in $L^p\left(\mathbb{R}^n\right)$.
+\end{theorem}
+\begin{rmk}
+    $T^*$ is the maximal operator associated with the family $\left\{T_{\varepsilon}\right\}$.
+\end{rmk}
+\begin{proof}
+    Consider a sequence of functions $\left\{f_n\right\} \subset L^p$ converging to $f$ in $L^p$ and satisfying $T_{\varepsilon} f_n(x) \rightarrow f_n(x)$ almost everywhere. Then,
+
+$$\begin{aligned}
+& m\left(\left\{x: \limsup _{\varepsilon \rightarrow \varepsilon_0}\left|T_{\varepsilon} f(x)-f(x)\right|>\lambda\right\}\right) \\
+& \leqslant m\left(\left\{x:\limsup _{\varepsilon \rightarrow \varepsilon_0}\left|T_{\varepsilon}\left(f-f_n\right)(x)-\left(f-f_n\right)(x)\right|>\lambda\right\}\right) \\
+& \leqslant m\left(\left\{x:\left|T^*\left(f-f_n\right)(x)\right|>\frac{\lambda}{2}\right\}\right) + m\left(\left\{x:\left|\left(f-f_n\right)(x)\right|>\frac{\lambda}{2}\right\}\right) \\
+& \leqslant \left(\frac{2 C}{\lambda}\left\|f-f_n\right\|_p\right)^q + \left(\frac{2}{\lambda}\left\|f-f_n\right\|_p\right)^p \rightarrow 0 \quad \text{as } n \rightarrow \infty.
+\end{aligned}$$
+Therefore,
+$$m\left(\left\{x: \limsup _{\varepsilon \rightarrow \varepsilon_0}\left|T_{\varepsilon} f(x)-f(x)\right|>\lambda\right\}\right) = 0.$$
+Hence,
+$$m\left(\left\{x: \limsup _{\varepsilon \rightarrow \varepsilon_0}\left|T_{\varepsilon} f(x)-f(x)\right|>0\right\}\right) \leqslant \sum_{k=1}^{\infty} m\left(\left\{x: \limsup _{\varepsilon \rightarrow \varepsilon_0}\left|T_{\varepsilon} f(x)-f(x)\right|>\frac{1}{k}\right\}\right) = 0.$$
+Thus, $f$ belongs to the given set.
+\end{proof}
+
+\begin{theorem}
+  If $|\phi(x)| \leqslant \psi(x)$ almost everywhere, where $\psi$ is a non-negative, radially decreasing, and integrable function, and $f \in L^p\left(\mathbb{R}^n\right)$ for $1 \leq p < \infty$, then
+
+$$\lim _{\varepsilon \rightarrow 0} \phi_{\varepsilon} * f(x) = \left(\int \phi\right) f(x)$$
+
+almost everywhere.  
+\end{theorem}
+\begin{proof}
+    By some known results, $\sup _{\varepsilon>0}\left|\phi_{\varepsilon} * f(x)\right|$ is of weak type $(1,1)$ and strong type $(p, p)$ for $1 < p < \infty$.
+From the previous theorem, the set
+
+$$\left\{f \in L^p\left(\mathbb{R}^n\right): \lim _{\varepsilon \rightarrow 0} \phi_{\varepsilon} * f(x) = \left(\int \phi\right) f(x) \text{ a.e.}\right\}$$
+
+is closed in $L^p\left(\mathbb{R}^n\right)$.
+Since $S \subset \left\{f \in L^p\left(\mathbb{R}^n\right): \lim _{\varepsilon \rightarrow 0} \phi_{\varepsilon} * f(x) = \left(\int \phi\right) f(x) \text{ a.e.}\right\} \subset L^p$,
+taking the closure, we have $\bar{S} = L^p$.
+Therefore,
+
+$$\left\{f \in L^p\left(\mathbb{R}^n\right): \lim _{\varepsilon \rightarrow 0} \phi_{\varepsilon} * f(x) = \left(\int \phi\right) f(x) \text{ a.e.}\right\} = L^p.$$
+\end{proof}
+\begin{example}
+    Let $P(x) = \frac{C_n}{\left(1 + |x|^2\right)^{\frac{n+1}{2}}}$ be the Poisson kernel, where $C_n = \frac{\Gamma\left(\frac{n+1}{2}\right)}{\pi^{\frac{n+1}{2}}}$.
+Define
+
+$$P_t(x) = C_n \frac{t}{\left(t^2 + |x|^2\right)^{\frac{n+1}{2}}}.$$
+
+Now, let $u(x, t) = P_t(x) * f(x)$. Then, for $f \in L^p$, the function $u(x, t)$ solves the Dirichlet problem
+
+$$\begin{cases}
+\left(\Delta_x + \frac{\partial^2}{\partial t^2}\right) u = 0 & \text{in } \mathbb{R}_{+}^{n+1} = \left\{(x, t): x \in \mathbb{R}^n, t > 0\right\}, \\
+u(x, 0) = f(x) & \text{a.e. on } \mathbb{R}^n.
+\end{cases}$$
+\end{example}

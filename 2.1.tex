@@ -1,0 +1,198 @@
+\begin{definition}
+    Let $f$ be a function in $L^{1}\left(\mathbb{R}^n\right)$. The Fourier transform of $f$, denoted by $\hat{f}(\xi)$, is defined as
+
+$$\hat{f}(\xi)=\int_{\mathbb{R}^n} f(x) e^{-2 \pi i x \cdot \xi} \, dx, \quad \text{for } \xi \in \mathbb{R}^n.$$
+\end{definition}
+\begin{proposition}
+    Suppose $f \in L^{1}\left(\mathbb{R}^n\right)$. Then the following properties hold:
+
+(a) The $L^{\infty}$-norm of $\hat{f}$ is bounded by the $L^{1}$-norm of $f$, i.e., $\|\hat{f}\|_{\infty} \leqslant\|f\|_1$.
+
+(b) The function $\hat{f}$ is uniformly continuous on $\mathbb{R}^n$.
+
+(c) As $|\xi|$ approaches infinity, $\hat{f}(\xi)$ tends to zero. This is known as the Riemann-Lebesgue Lemma.
+
+(d) If $f$ and $g$ are functions in $L^{1}\left(\mathbb{R}^n\right)$ such that their product $f \cdot g$ is also in $L^{1}\left(\mathbb{R}^n\right)$, then the Fourier transform of their sum is the product of their Fourier transforms, i.e., $\widehat{f+g}=\hat{f} \cdot \hat{g}$.
+\end{proposition}
+\begin{proof}
+    (c):
+Consider the following manipulation of the Fourier transform:
+
+$$\begin{aligned}
+\hat{f}(\xi) &= \int_{\mathbb{R}^n} f(x) e^{-2 \pi i x \cdot \xi} \, dx \\
+&= \int_{\mathbb{R}^n} f(x) e^{-2 \pi i x \cdot \xi} \cdot (-1) e^{-2 \pi i \xi \cdot \frac{\xi}{2|\xi|^2}} \, dx \\
+&= -\int_{\mathbb{R}^n} f(x) e^{-2 \pi i \xi \cdot \left(x + \frac{\xi}{2|\xi|^2}\right)} \, dx \\
+&= -\int_{\mathbb{R}^n} f\left(x - \frac{\xi}{2|\xi|^2}\right) e^{-2 \pi i x \cdot \xi} \, dx.
+\end{aligned}$$
+Then, we have
+$$\begin{aligned}
+|\hat{f}(\xi)| &= \frac{1}{2}|\hat{f}(\xi) + \hat{f}(\xi)| \\
+&= \frac{1}{2}\left|\int_{\mathbb{R}^n} \left[f(x) - f\left(x - \frac{\xi}{2|\xi|^2}\right)\right] e^{-2 \pi i x \cdot \xi} \, dx\right| \\
+&\leqslant \frac{1}{2} \int_{\mathbb{R}^n} \left|f(x) - f\left(x - \frac{\xi}{2|\xi|^2}\right)\right| \, dx \\
+&\rightarrow 0 \quad \text{as } |\xi| \rightarrow \infty.
+\end{aligned}$$
+
+\end{proof}
+\begin{proposition}
+    Let $f$ be a function in $L^{1}(\mathbb{R})$. Then the following properties of the Fourier transform hold:
+
+(1) The Fourier transform of $f(x-b)$ is $e^{-2 \pi i \xi \cdot b} \hat{f}(\xi)$.
+
+(2) The Fourier transform of $e^{2 \pi i x \cdot h} f(x)$ is $\hat{f}(\xi-h)$.
+
+(3) For any positive real number $t$, the Fourier transform of $t^{-n} f(t^{-1} x)$ is $\hat{f}(t \xi)$.
+
+(4) Let $\rho$ be an orthogonal transformation on $\mathbb{R}^n$, i.e., a linear transformation that preserves the inner product, satisfying $\rho(x) \cdot \rho(y) = x \cdot y$. Then the Fourier transform of $f \circ \rho$ is $\hat{f} \circ \rho(\xi)$.
+
+(5) If $f$ is a radial function, then $\hat{f}$ is also radial.
+\end{proposition}
+\begin{proof}
+(4):
+
+    $$\begin{aligned}
+(f \circ \rho)^{\wedge}(\xi) &= \int_{\mathbb{R}^n} f(\rho x) e^{-2 \pi i x \cdot \xi} \, dx \\
+&\overset{y = \rho x}{=} \int_{\mathbb{R}^n} f(y) e^{-2 \pi i \rho^{-1} y \cdot \xi} \, dy \\
+&= \int_{\mathbb{R}^n} f(y) e^{-2 \pi i y \cdot \rho \xi} \, dy \\
+&= \hat{f}(\rho \xi).
+\end{aligned}$$
+
+(5) To show that $\hat{f}(\xi_1) = \hat{f}(\xi_2)$ when $|\xi_1| = |\xi_2|$, we can use a rotation $\rho$ such that $\rho \xi_1 = \xi_2$. Then, by property (4), we have
+
+$$\hat{f}(\xi_2) = \hat{f}(\rho \xi_1) = (f \circ \rho)^{\wedge}(\xi_1) = \hat{f}(\xi_1).$$
+\end{proof}
+\begin{theorem}
+    Let $f \in L^{1}(\mathbb{R})$. Then,
+
+(1) $\frac{\partial \hat{f}(\xi)}{\partial \xi_k}=\left(-2 \pi i x_k f(x)\right)^{\wedge}(\xi)$ provided that $x_k f \in L^1$.
+
+(2) If $f \in C^{1} \cap C_0$ and $\frac{\partial f}{\partial x_k} \in L^1$, then $\left(\frac{\partial f}{\partial x_k}\right)^{\wedge}(\xi)=2 \pi i \xi_k \hat{f}(\xi)$.
+
+Here, $C_0$ denotes the set of continuous functions that vanish at infinity, i.e., $C_0=\{f \in C(x): \forall \varepsilon>0, \{x | |f(x)| \geqslant \varepsilon\} \text{ is compact }\}$.
+\end{theorem}
+\begin{proof}
+    (1): Consider $h=(0, \ldots, 0, h_k, 0, \ldots, 0)$ where $h_k$ is the $k^{\text{th}}$ element. We have
+
+$$
+\frac{\hat{f}(\xi+h)-\hat{f}(\xi)}{h_k}=\int_{\mathbb{R}^n}\frac{e^{-2 \pi i x_k h_k}-1}{h_k} f(x) e^{-2 \pi i x \cdot \xi} \, dx.
+$$
+Observe that $\left|\frac{e^{-2 \pi i x_k h_k}-1}{h_k} f(x) e^{-2 \pi i x \cdot \xi}\right| \leqslant 2 \pi |x_k f(x)|$.
+By the Dominated Convergence Theorem (D.C.T.),
+$$
+\lim_{{h_k \to 0}} \frac{\hat{f}(\xi+h)-\hat{f}(\xi)}{h_k}=\int_{\mathbb{R}^n} -2 \pi i x_k f(x) e^{-2 \pi i x \cdot \xi} \, dx = \left(-2 \pi i x_k f(x)\right)^{\wedge}(\xi).
+$$
+\end{proof}
+\begin{corollary}
+    For $\alpha \in \mathbb{Z}_+^n$ and $D^\alpha = \left(\partial_{x_1}\right)^{\alpha_1} \cdots \left(\partial_{x_n}\right)^{\alpha_n}$, let $P(x) = \sum_{|\alpha| \leq d} a_\alpha x^\alpha$ where $|\alpha| = \alpha_1 + \cdots + \alpha_n$ and $x^\alpha = x_1^{\alpha_1} x_2^{\alpha_2} \ldots x_n^{\alpha_n}$.
+Define the differential operator $P(D) = \sum_{|\alpha| \leqslant d} a_\alpha D^\alpha$. Then,
+$$
+P(D) \hat{f}(\xi) = (P(-2 \pi i x) f(x))^{\wedge}(\xi).
+$$
+Moreover, for $f \in S(\mathbb{R}^n)$ (the Schwartz space),
+$$
+(P(D) f)^{\wedge}(\xi) = P(2 \pi i \xi) \hat{f}(\xi).
+$$
+\end{corollary}
+\begin{definition}[Inverse Fourier Transform]
+    If $f \in L^{1}$, the inverse Fourier transform of $f$ is defined as
+
+$$
+\check{f}(x) = \int_{\mathbb{R}^n} f(\xi) e^{2 \pi i \xi \cdot x} \, d\xi \, (= \hat{f}(-x)).
+$$
+\end{definition}
+\begin{lemma}
+    If $f, g \in L^{\prime}$, then $\int \hat{f}(\xi) g(\xi) d\xi = \int f(x) \hat{g}(x) dx$ (the multiplication formula).
+\end{lemma}
+\begin{proof}
+    $$\begin{aligned}
+\int_{\mathbb{R}^n} \hat{f}(\xi) g(\xi) d\xi &= \iint_{{\mathbb{R}^n}\times{\mathbb{R}^n}} f(x) e^{-2 \pi i x \cdot \xi} dx g(\xi) d\xi \\
+&= \iint_{{\mathbb{R}^n}\times{\mathbb{R}^n}} g(\xi) e^{-2 \pi i x \cdot \xi} d\xi f(x) dx \\
+&= \int_{\mathbb{R}^n} f(x) \hat{g}(x) dx.
+\end{aligned}
+$$
+\end{proof}
+\begin{lemma}
+ $\left(e^{-\pi|x|^2}\right)^{\wedge}(\xi) = e^{-\pi|\xi|^2}$.
+\end{lemma}
+\begin{proof}
+$$
+    \begin{aligned}
+\left(e^{-\pi|x|^2}\right)^{\wedge}(\xi) &= \int_{\mathbb{R}^n} e^{-\pi|x|^2} e^{-2 \pi i x \cdot \xi} dx \\
+&= \prod_{i=1}^n \int_{\mathbb{R}} e^{-\pi x_i^2} e^{-2 \pi i x_i \xi_i} dx_i.
+\end{aligned}
+$$
+It suffices to show $\left(e^{-\pi x^2}\right)^{\wedge}(\xi) = e^{-\pi \xi^2}$ for $x, \xi \in \mathbb{R}^1$.
+
+The function $f(x) = e^{-\pi x^2}$ is the solution of the initial value problem (I.V.P):
+$$
+\begin{cases}
+u' + 2\pi x u = 0, \\
+u(0) = 1.
+\end{cases}
+$$
+If $f \in S$ satisfies the initial value problem, then $\hat{f}$ also satisfies the same initial value problem. Indeed,
+$$
+\begin{aligned}
+\hat{f}(0) &= \int_{\mathbb{R}^n} f(x) dx = 1, \\
+0 &= \left(f' + 2\pi x f\right)^{\wedge}(\xi) \\
+&= 2\pi i \xi \hat{f}(\xi) + \frac{1}{-i}(\hat{f})'(\xi) \\
+&= i(\hat{f}(\xi) + 2\pi \xi \hat{f}(\xi)).
+\end{aligned}
+$$
+Therefore, by uniqueness, $\hat{f} = f$.
+
+\begin{rmk}
+    $\left(e^{-\pi a|x|^2}\right)^{\wedge}(\xi) = a^{-\frac{n}{2}} e^{-\pi \frac{|\xi|^2}{a}}$ for $a > 0$.
+\end{rmk} 
+\end{proof}
+\begin{theorem}[The Fourier inversion theorem for $L^{1}$ functions]\label{thm2.1}
+    If $f, \hat{f} \in L^1\left(\mathbb{R}^n\right)$, then $(\hat{f})^\vee = f$ almost everywhere (a.e.).
+
+\end{theorem}
+\begin{rmk}
+    Since $\hat{f} \in L^{1}$, then $(\hat{f})^\vee \in C_0$. Modify $f$ on a set of measure zero such that
+$$
+(\hat{f})^\vee(x) = f(x) \quad \forall x.
+$$
+\end{rmk} 
+\begin{definition}
+    $G_{\varepsilon}(f) = \int_{\mathbb{R}^n} f(x) e^{-\varepsilon|x|^2} dx$ is the Gauss means of $\int_{\mathbb{R}^n} f(x) dx$.
+\end{definition}
+\begin{theorem}
+    If $f \in L^{1}\left(\mathbb{R}^n\right)$, then
+$$
+\left\| \int_{\mathbb{R}^n} \hat{f}(\xi) e^{2 \pi i x \cdot \xi} e^{-4 \pi^2 \varepsilon^2|\xi|^2} d\xi - f(x) \right\|_{L^{1}(dx)} \rightarrow 0
+$$
+as $\varepsilon \rightarrow 0$.
+\end{theorem}
+\begin{proof}
+    $$
+\begin{aligned}
+\int_{\mathbb{R}^n}\hat{f}(\xi) e^{2 \pi i x \xi} e^{-4 \pi^2 \varepsilon^2|\xi|^2} d\xi &= \int f(y) \left(e^{2 \pi i x \cdot \xi} e^{-4 \pi^2 \varepsilon^2|\xi|^2}\right)^{\wedge}(y) dy \\
+&= \int_{\mathbb{R}^n} f(y) \left(e^{-4 \pi^2 \varepsilon^2|\xi|^2}\right)^{\wedge}(y-x) dy \\
+&= \int_{\mathbb{R}^n} f(y) \varepsilon^{-n}(4 \pi)^{-\frac{n}{2}} e^{-\frac{1}{4}\left|\frac{y-x}{\varepsilon}\right|^2} dy \\
+&= \int_{\mathbb{R}^n} f(y) \varphi_{\varepsilon}(x-y) dy \\
+&= f * \varphi_{\varepsilon}(x),
+\end{aligned}
+$$
+where $\varphi(x) = (4 \pi)^{-\frac{n}{2}} e^{-\frac{1}{4}|x|^2} \in L^1$ and $\int_{\mathbb{R}^n}\varphi(x) dx= 1$.
+\end{proof}
+Next we prove Theorem \ref{thm2.1}
+\begin{proof}
+    By the previous theorem, there exists a sequence $\left\{{\varepsilon_k}\right\}_{k=1}^{\infty}$ converging to 0 such that
+
+$$\lim_{{\varepsilon_k \rightarrow 0}} \int \hat{f}(\xi) e^{2 \pi i x \cdot \xi} e^{-4 \pi^2 \varepsilon_k^2|\xi|^2} \, d\xi = f(x) \text{ for almost every } x.$$
+
+Since $\hat{f} \in L^{\prime}$, by the Dominated Convergence Theorem, we have
+
+$$f(x) = \int \lim_{{\varepsilon_k \rightarrow 0}} \hat{f}(\xi) e^{2 \pi i x \cdot \xi} e^{-4 \pi^2 \varepsilon_k^2|\xi|^2} \, d\xi = \int \hat{f}(\xi) e^{2 \pi i x \cdot \xi} \, d\xi = (\hat{f})^{\vee}(x).$$
+\end{proof}
+\begin{corollary}
+    If $f_1, f_2 \in L^{\prime}$ and $\hat{f}_1(\xi) = \hat{f}_2(\xi)$, then $f_1(x) = f_2(x)$ for almost every $x$.
+\end{corollary}
+\begin{proof}
+    Set $f = f_1 - f_2$. Then $f \in L^1$ and $\hat{f} = \widehat{f_1 - f_2} = \hat{f_1} - \hat{f_2} = 0 \in L^1$.
+By Fourier inversion, $f = (\hat{f})^{\vee} = 0$, thus $f_1 = f_2$ almost everywhere.
+\end{proof}
+\begin{rmk}
+    Let $\mathcal{F}f(\xi) = \hat{f}(\xi)$ denote the Fourier transform of $f$ evaluated at $\xi$.
+\end{rmk} 

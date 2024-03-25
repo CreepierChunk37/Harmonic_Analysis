@@ -1,0 +1,45 @@
+\noindent\textbf{(Interpolation)} Let $f$ be a measurable function on the measure space $(X, M, \mu)$. The distribution function of $f$ is defined as $d_f: [0, \infty) \rightarrow [0, \infty]$ given by
+
+$$d_f(\lambda) = \mu(\{x \in X: |f(x)| > \lambda\})$$as a function of $\lambda$.
+
+\noindent\textbf{(Weak $L^p$ norm)} For $0 < p < \infty$, the weak $L^p$ norm of $f$ is defined as
+
+$$\|f\|_{p, \infty} = \sup_{\lambda > 0} \left(\lambda^p \mu(\{x \in X: |f(x)| > \lambda\})\right)^{\frac{1}{p}}.
+$$
+\noindent\textbf{(Weak $L^p$ space)} The weak $L^p$ space, denoted by $L^{p, \infty}$, is the set of all functions $f$ such that $\|f\|_{p, \infty} < \infty$.
+
+\noindent\textbf{Remark:} The weak $L^{\infty}$ space is identical to the standard $L^{\infty}$ space.
+
+\begin{proposition}
+    If $0 < p < \infty$, then
+
+$$\|f\|_p^p = \int |f|^p d\mu = p \int_0^{\infty} \alpha^{p-1} d_f(\alpha) d\alpha.$$
+\end{proposition} 
+\begin{proof}
+    Assuming $\mu$ is a suitable measure, we have
+$$
+\begin{aligned}
+p \int_0^{\infty} \alpha^{p-1} \mu(\{x \in X: |f(x)| > \alpha\}) d\alpha &= p \int_0^{\infty} \alpha^{p-1} \int_X \chi_{\{x: |f(x)| > \alpha\}} d\mu d\alpha \\
+&\stackrel{\text{Fubini}}{=} \int_X \int_0^{|f(x)|} p \alpha^{p-1} d\alpha d\mu(x) \\
+&= \int_X |f(x)|^p d\mu(x) = \|f\|_p^p.
+\end{aligned}
+$$
+\end{proof}
+\begin{theorem}[The Marcinkiewicz Interpolation Theorem]
+    Let $(X, \mu)$ and $(Y, \nu)$ be measure spaces. Suppose that $p_0, p_1, q_0, q_1$ are elements of $[1, \infty]$ satisfying $p_0 \leqslant q_0$, $p_1 \leqslant q_1$, and $q_0 \neq q_1$. Consider $T$ to be a sublinear map ($|T(cf)| = c|T(f)|$ and $|T(f+g)| \leqslant |T(f)| + |T(g)|$) from $L^{p_0}(\mu) + L^{p_1}(\mu)$ to the space of measurable functions on $Y$. If $T$ is of weak type $(p_0, q_0)$ and $(p_1, q_1)$, then for any $0 < t < 1$ and $\left(\frac{1}{p}, \frac{1}{q}\right) = (1-t)\left(\frac{1}{p_0}, \frac{1}{q_0}\right) + t\left(\frac{1}{p_1}, \frac{1}{q_1}\right)$, the map $T$ is of strong type $(p, q)$.Then, $B_p$ remains bounded as $p \rightarrow p_j$ if $p_j < \infty$ (or as $p \rightarrow \infty$ if $p_j = \infty$).
+\end{theorem}
+\begin{rmk}
+  Weak type means that there exist constants $C_0$ and $C_1$ such that $\|Tf\|_{L^{q_0, \infty}} \leqslant C_0\|f\|_{L^{p_0}}$ and $\|Tf\|_{L^{q_1, \infty}} \leqslant C_1\|f\|_{L^{p_1}}$.
+Strong type means that there exists a constant $B_p$ depending only on $p, p_j, q_j, C_j$ (for $j = 0, 1$) such that $\|Tf\|_{L^q} \leqslant B_p\|f\|_{L^p}$.   
+\end{rmk}
+
+\begin{theorem}[The Riesz-Thorin Interpolation Theorem]
+    
+Let $(X, \mu)$ and $(Y, \nu)$ be two measure spaces, and let $1 \leqslant p_0, p_1, q_0, q_1 \leqslant \infty$. If $q_0 = q_1 = \infty$, assume further that $\nu$ is semifinite. Let $T$ be a linear operator from $L^{p_0}(X) + L^{p_1}(X)$ into $L^{q_0}(Y) + L^{q_1}(Y)$ such that:
+
+1. $\|Tf\|_{L^{q_0}} \leqslant M_0\|f\|_{L^{p_0}}$ for all $f \in L^{p_0}$ (strong type $(p_0, q_0)$).
+
+2. $\|Tf\|_{L^{q_1}} \leqslant M_1\|f\|_{L^{p_1}}$ for all $f \in L^{p_1}$ (strong type $(p_1, q_1)$).
+
+Then, for any $0 < \theta < 1$ and $\left(\frac{1}{p}, \frac{1}{q}\right) = (1-\theta)\left(\frac{1}{p_0}, \frac{1}{q_0}\right) + \theta\left(\frac{1}{p_1}, \frac{1}{q_1}\right)$, we have $\|Tf\|_{L^q} \leqslant M_0^{1-\theta}M_1^\theta\|f\|_{L^p}$ for all $f \in L^p$ (strong type $(p, q)$).
+\end{theorem}

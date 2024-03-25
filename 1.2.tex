@@ -1,0 +1,81 @@
+$f \in L_{loc}^1(\mathbb{R}^n)$ The Hardy-Littlewood maximal function of $f$ is defined as
+$$
+M f(x) = \sup_{r > 0} \frac{1}{|B_r|} \int_{B_r} |f(x - y)| \, dy \quad \text{where} \quad B_r = B(0, r) \subset \mathbb{R}^n
+$$
+which can also be expressed as
+$$
+M f(x) = \sup_{r > 0} \frac{1}{|B_r|} \int_{B(x, r)} |f(y)| \, dy
+$$
+or equivalently as
+$$
+M f(x) = \sup_{r > 0} \frac{1}{|B_r|} (\chi_{B_r} * |f|)(x)
+$$
+where $\chi_{B_r}$ is the characteristic function of the ball $B_r$.
+
+An alternative definition is given by
+$$
+\tilde{M} f(x) = \sup_{x \in B} \frac{1}{|B|} \int_B |f(y)| \, dy
+$$
+where the supremum is taken over all balls $B$ containing $x$. It can be shown that $M f(x)$ and $\tilde{M} f(x)$ are equivalent in the sense that there exists a constant $C > 0$ such that
+$$
+M f(x) \leq \tilde{M} f(x) \leq C M f(x)
+$$
+denoted as $\tilde{M} f(x) \lesssim M f(x)$.
+\begin{lemma}[A finite version of the Vitali covering lemma]
+    Let $E$ be a measurable subset of $\mathbb{R}^n$ that is the union of a finite collection of balls $\{B_j\}$. Then one can select a disjoint subcollection $B_1, \ldots, B_m$ of the $\{B_j\}$ so that
+$$
+\sum_{k=1}^m |B_k| > C |E|
+$$
+with $C = 3^{-n}$.
+\end{lemma}
+\begin{theorem}
+    Let $f$ be a function defined on $\mathbb{R}^n$.\\
+(a) The operator $M$ is of weak type $(1, 1)$, i.e., if $f \in L^1$, $\lambda > 0$, then
+$$
+m(\{x : |M f(x)| > \lambda\}) \leq \frac{C}{\lambda} \|f\|_1
+$$
+where $m$ denotes the Lebesgue measure.\\
+(b) $M$ is of strong type $(p, p)$ for $1 < p \leq \infty$, i.e.,
+$$
+\|M f\|_p \leq A_p \|f\|_p
+$$
+where $A_p$ is a constant depending only on $p$ and $n$.
+\end{theorem}
+\begin{rmk}
+    If $f$ is in $L^1$ and is not identically zero, then $M f \notin L^\infty$.
+
+Since $f$ is not identically zero, there exist $\varepsilon > 0$ and $R > 0$ such that
+$$
+\int_{B_R} |f| \geq \varepsilon > 0
+$$
+If $|x| > R$, then $B_R \subset B(x, 2|x|)$ and
+$$
+M f(x) \geq \frac{1}{|B(x, 2|x|)|} \int_{B(x, 2|x|)} |f| \, dv \geq \frac{C}{|x|^n} \int_{B_R} |f| \, dv \geq \frac{C \varepsilon}{|x|^n}
+$$
+which is not in $L^1$. Therefore, $M f \notin L^\infty$.
+\end{rmk}
+
+\begin{proof}
+    Obviously, $\|M f\|_\infty \leq \|f\|_\infty$, so by the Marcinkiewicz interpolation theorem, it suffices to prove (a).
+Let $E_\lambda = \{x : |\tilde{M} f(x)| > \lambda\}$. For all $x \in E_\lambda$, there exists a ball $B_x$ such that
+$$
+\frac{1}{m(B_x)} \int_{B_x} |f(y)| \, dy > \lambda
+$$
+Fix a compact subset $K$ of $E_\lambda$. Since $K$ is covered by $\bigcup_{x \in E_\lambda} B_x$, we can select a finite subcover $K \subset \bigcup_{l=1}^N B_l$. By the covering lemma, there exist disjoint balls $B_{i1}, \ldots, B_{ik}$ such that
+$$
+m\left(\bigcup_{l=1}^N B_l\right) \leq C \sum_{j=1}^k m(B_{ij})
+$$
+Therefore,
+$$
+m(K) \leq m\left(\bigcup_{l=1}^N B_l\right) \leq C \sum_{j=1}^k m(B_{ij}) \leq \frac{C}{\lambda} \sum_{j=1}^k \int_{B_{ij}} |f| \, dy = \frac{C}{\lambda} \int_{\bigcup B_{ij}} |f| \, dy \leq \frac{C}{\lambda} \|f\|_1
+$$
+Letting $m(K) \to m(E_\lambda)$ completes the proof of (a).
+\end{proof} 
+
+As a corollary, we obtain the Lebesgue differentiation theorem:
+\begin{theorem}
+    If $f \in L_{loc}^1(\mathbb{R}^n)$, then
+$$
+\lim_{r \to 0} \frac{1}{|B(x, r)|} \int_{B(x, r)} f(y) \, dy = f(x) \quad \text{for a.e.} ~  x
+$$
+\end{theorem}

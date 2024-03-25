@@ -1,0 +1,145 @@
+At the begining, we define the \textbf{seminorm} $\|f\|_{\alpha, \beta}=\|x^\alpha D^\beta f\|_{\infty}$. Then we define a topology on $\mathcal{S}$ as follows: a sequence $\{f_k\} \subset \mathcal{S}$ converges in $\mathcal{S}$ to $f$ if and only if
+$$
+\forall \alpha, \beta \in \mathbb{N}_0^n, \quad \lim_{k \rightarrow \infty} \|f_k - f\|_{\alpha, \beta} = 0.
+$$
+The space of bounded linear functionals on $\mathcal{S}$, denoted by $\mathcal{S}'$, is called the space of tempered distributions. A linear map $T: \mathcal{S} \rightarrow \mathbb{C}$ belongs to $\mathcal{S}'$ if $\lim_{k \rightarrow \infty} T(\phi_k) = 0$ whenever $\lim_{k \rightarrow \infty} \phi_k = 0$ in $\mathcal{S}$.
+\begin{theorem}
+    The Fourier transform is a continuous map from $\mathcal{S}$ to $\mathcal{S}$.
+\end{theorem}
+\begin{proof}
+    We have
+$$
+\|\hat{f}\|_{\alpha, \beta} = \|\xi^\alpha D^\beta \hat{f}(\xi)\|_{\infty} \leq C\|\widehat{D^\alpha(x^\beta f)}(\xi)\|_{\infty} \leq C\|D^\alpha(x^\beta f)\|_1.
+$$
+The $L^1$ norm can be bounded by a finite linear combination of seminorms of $f$, which implies that the Fourier transform is a continuous map.
+\end{proof}
+\begin{rmk}
+    Using Leibniz's rule, we can write
+$$
+D^\alpha(x^\beta f) = \sum_{\alpha_1 + \alpha_2 = \alpha} C_{\alpha_1, \alpha_2} D^{\alpha_1}(x^\beta) D^{\alpha_2}f.
+$$
+Then,
+$$
+\begin{aligned}
+\|D^{\alpha_1}(x^\beta) D^{\alpha_2}f\|_1 &= \|(1 + |x|^2)^{-N}(1 + |x|^2)^N D^{\alpha_1}(x^\beta) D^{\alpha_2}f\|_1 \\
+&\leq \|(1 + |x|^2)^N D^{\alpha_1}(x^\beta) D^{\alpha_2}f\|_{\infty} \|(1 + |x|^2)^{-N}\|_1 \\
+&< \infty,
+\end{aligned}
+$$
+since the first factor is a finite linear combination of seminorms of $f$.
+\end{rmk}
+\begin{definition}
+    The Fourier transform (F.T.) of $T \in S'$ is the tempered distribution given by
+    $$
+\hat{T}(f) = T(\hat{f}) \quad \text{for } f \in S.
+$$
+\end{definition}
+\begin{rmk}
+    $\hat{T}$ is a tempered distribution since $f_k \rightarrow 0$ in $S$ implies $\hat{f}_k \rightarrow 0$ in $S$ and hence
+$$
+T(\hat{f}_k) \rightarrow 0 \Rightarrow \hat{T} \in S'.
+$$
+\end{rmk}
+~\\
+\textbf{\large{Examples of tempered distributions}}
+
+(1) Let $f \in L^p$ with $1 \leqslant p \leqslant \infty$. Define
+$$
+L(\varphi) = L_f(\varphi) = \int_{\mathbb{R}^n} f(x) \varphi(x) \, dx \quad \text{for } \varphi \in S.
+$$
+$L_f \in S'$ since $\|L_f(\varphi)\| \leq \|f\|_p \|\varphi\|_q \rightarrow 0$ as $\varphi \rightarrow 0$ in $S$ (where $q$ is the conjugate exponent of $p$). Then,
+$$
+\hat{L}_f(\varphi) = L_f(\hat{\varphi}) = \int_{\mathbb{R}^n} f(x) \hat{\varphi}(x) \, dx.
+$$
+If $1 \leqslant p \leqslant 2$ and $f \in L^p$, then for $\varphi \in S$,
+$$
+\hat{L}_f(\varphi) = \int_{\mathbb{R}^n} f(x) \hat{\varphi}(x) \, dx = \int_{\mathbb{R}^n} \hat{f}(x) \varphi(x) \, dx,
+$$
+where $\hat{f}$ is the Fourier transform of $f$ in the sense of $L^{p'}$ norm (with $p'$ being the conjugate exponent of $p$). A distribution $u \in S'$ \textbf{coincides with} a function $h$ if
+$$
+u(\varphi) = \int_{\mathbb{R}^n} h(x) \varphi(x) \, dx \quad \text{for all } \varphi \in S.
+$$
+In this case, $\hat{L}_f$ coincides with $\hat{f}$.
+
+\noindent\textbf{Note}: For any $p > 2$, there exists an $f \in L^p$ whose Fourier transform as a tempered distribution dose not \textbf{coincides with} a function.
+
+(2) If $\mu$ is a finite Borel measure, the linear functional $L = L_\mu$ defined by
+$$
+L(\varphi) = L_\mu(\varphi) = \int_{\mathbb{R}^n} \varphi(x) \, d\mu(x) \quad \text{for } \varphi \in S
+$$
+is a tempered distribution. Then,
+$$
+\begin{aligned}
+\hat{L}_\mu(\varphi) &= L_\mu(\hat{\varphi}) = \int_{\mathbb{R}^n} \hat{\varphi}(\xi) \, d\mu(\xi) \\
+&= \int_{\mathbb{R}^n} \int_{\mathbb{R}^n} \varphi(x) e^{-2\pi i x \cdot \xi} \, dx \, d\mu(\xi) \\
+&= \int_{\mathbb{R}^n} \left( \int_{\mathbb{R}^n} e^{-2\pi i x \cdot \xi} \, d\mu(\xi) \right) \varphi(x) \, dx.
+\end{aligned}
+$$
+$\hat{L}_\mu(\varphi)$ coincides with $\hat{\mu}(x) = \int_{\mathbb{R}^n} e^{-2\pi i x \cdot \xi} \, d\mu(\xi)$.
+
+(3) A measurable function $f$ satisfying $\frac{f(x)}{(1+|x|^2)^k} \in L^p$, where $1 \leqslant p \leqslant \infty$ and $k \in \mathbb{N}$, is called a tempered function. (When $p=\infty$, such a function is called a slowly increasing function.)
+\begin{theorem}
+    A linear functional $L$ on $S$ is a tempered distribution if and only if there exist constants $C > 0$ and integers $m$ and $l$ such that
+$$
+|L(\varphi)| \leqslant C \sum_{\substack{|\alpha| \leqslant l \\ |\beta| \leqslant m}} \|\varphi\|_{\alpha, \beta} \quad \forall \varphi \in S.
+$$
+\end{theorem}
+~\\
+\textbf{\large{Convolution of a distribution with a function in $S$}}
+
+For a function $g$ on $\mathbb{R}^n$, its reflection $\tilde{g}$ is defined by $\tilde{g}(x) = g(-x)$. If $u, \varphi, \psi \in S$, then
+$$
+\int_{\mathbb{R}^n} (u * \varphi)(x) \psi(x) \, dx = \int_{\mathbb{R}^n} u(x) (\tilde{\varphi} * \psi)(x) \, dx.
+$$
+The mappings $\psi \longmapsto \int_{\mathbb{R}^n} (u * \varphi)(x) \psi(x) \, dx$ and $\theta \longmapsto \int_{\mathbb{R}^n} u(x) \theta(x) \, dx$ are linear functionals on $S$. Denote these functionals by $u * \varphi$ and $u$, respectively. Then, $(*)$ is given by
+$$
+(u * \varphi)(\psi) = u(\tilde{\varphi} * \psi).
+$$
+\begin{definition}
+    Let $u \in S'$ and $\varphi \in S$. Define the convolution $u * \varphi$ by $(u * \varphi)(\psi) = u(\tilde{\varphi} * \psi)$. Then, for all $u \in S'$ and $\varphi \in S$, we have $u * \varphi \in S'$ and the convolution is associative: $(u * \varphi) * \psi = u * (\varphi * \psi)$ whenever $u \in S'$ and $\varphi, \psi \in S$.
+\end{definition}
+\begin{theorem}
+    If $u \in S'$ and $\varphi \in S$, then the convolution $u * \varphi$ coincides with the function $f$ defined by $f(x) = u(\tau_x \tilde{\varphi})$ for $x \in \mathbb{R}^n$, where $\tau_x$ denotes the translation by $x$ (i.e., $\tau_x(g(y)) = g(y-x)$). Moreover, $f \in C^\infty$ and it as well as all its derivatives are slowly increasing, i.e., for all $\alpha$ there exist constants $C_\alpha, k_\alpha > 0$ such that
+$$
+\left| (\partial^\alpha f)(x) \right| \leqslant C_\alpha (1 + |x|)^{k_\alpha}.
+$$
+\end{theorem}
+\begin{proof}
+By the continuity of $u$ and the fact that
+$$
+\frac{\tau_{h e_j}(\tau_x(\tilde{\varphi})) - \tau_x(\tilde{\varphi})}{h} \rightarrow -\tau_x(\partial_j \tilde{\varphi})
+$$
+in $S$ as $h \rightarrow 0$, we have
+    $$
+    \frac{f(x+he_j)-f(x)}{h}=\frac{u(\tau_{x+he_j} \tilde{\phi})-u(\tau_x \tilde{\phi})}{h}=u(\frac{\tau_{he_j}( \tau_{x+he_j}\tilde{\phi})-\tau_x \tilde{\phi}}{h}) \rightarrow -u(T_x(\partial_j \tilde{\varphi})).
+    $$
+
+Considering higher-order derivatives, we find that the function $f$ belongs to the class $C^{\infty}$ and satisfies the relation:
+$$
+\partial^\alpha f(x) = (-1)^{|\alpha|} u(\tau_x D^\alpha \tilde{\varphi}).
+$$
+Moreover, we can estimate the magnitude of $\partial^\alpha f(x)$ as:
+$$
+\begin{aligned}
+|\partial^\alpha f(x)| &\leq c \sum_{|\gamma| \leq l} \sup_{y \in \mathbb{R}^n} |y^\gamma \tau_x(\partial^{\alpha+\beta} \tilde{\varphi})(y)| \\
+&\leq c \sum_{\substack{|\gamma| \leq l \\ |\beta| \leq m}} \sup_{y \in \mathbb{R}^n} |(x+y)^\gamma (\partial^{\alpha+\beta} \tilde{\varphi})(y)| \\
+&\leq C_l \sum_{|\beta| \leq m} \sup_{y \in \mathbb{R}^n} (1 + |x|^l + |y|^l) |(\partial^{\alpha+\beta} \tilde{\varphi})(y)|.
+\end{aligned}
+$$
+This estimation reveals that $|\partial^\alpha f(x)|$ is bounded by a polynomial of $x$.
+
+Now, let's demonstrate that for any $\psi$ belonging to the Schwartz space $S$, the following equality holds:
+$$
+(u * \varphi)(\psi) = \int_{\mathbb{R}^n} f(x) \psi(x) \, dx.
+$$
+To this end, we observe that:
+$$
+\begin{aligned}
+(u * \varphi)(\psi) &= u(\tilde{\varphi} * \psi) \\
+&= u\left( \int_{\mathbb{R}^n} \tilde{\varphi}(x-y) \psi(y) \, dy \right) \\
+&= u\left( \int_{\mathbb{R}^n} (\tau_y \tilde{\varphi})(x) \psi(y) \, dy \right) \\
+&= \int_{\mathbb{R}^n} u(\tau_y \tilde{\varphi}) \psi(y) \, dy.
+\end{aligned}
+$$
+Here, the transition from the Riemann sum of $\int_{\mathbb{R}^n} (\tau_y \tilde{\varphi})(x) \psi(y) \, dy$ to the integral is justified by the linearity and continuity of the functional $u$ in the Schwartz space $S$.
+\end{proof}

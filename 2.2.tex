@@ -1,0 +1,215 @@
+\begin{theorem}
+    Suppose that $|\varphi(x)| \leq \frac{c}{(1+|x|)^{n+\varepsilon_0}}$ for some constants $c, \varepsilon_0 > 0$ and $\int_{\mathbb{R}^n} \varphi(x) \, dx = a$. If $f \in L^p$ for $1 \leq p \leq \infty$, then
+$$\lim_{\varepsilon \rightarrow 0} f * \varphi_{\varepsilon}(x) = a f(x)$$
+holds for every $x$ in the Lebesgue set of $f$.
+
+
+\end{theorem}
+\begin{rmk}
+    The Lebesgue set $L_f$ of $f$ is defined as the set of points $x$ where $f(x)$ is finite and
+$$\lim_{r \rightarrow 0} \frac{1}{r^n} \int_{|y| < r} |f(x-y) - f(x)| \, dy = 0.$$
+\end{rmk}
+\begin{proof}
+    Let $x \in L_f$. For any $\delta > 0$, there exists $\eta > 0$ such that
+
+$$\frac{1}{r^n} \int_{|y| < r} |f(x-y) - f(x)| \, dy \leq \delta$$
+for all $r \leq \eta$. Now consider the expression
+$$\left|f * \varphi_{\varepsilon}(x) - a f(x)\right| = \left|\int_{\mathbb{R}^n} f(x-y) \varphi_{\varepsilon}(y) \, dy - \int_{\mathbb{R}^n} f(x) \varphi_{\varepsilon}(y) \, dy\right|.$$
+This can be rewritten as
+$$\left|\int_{\mathbb{R}^n} (f(x-y) - f(x)) \varphi_{\varepsilon}(y) \, dy\right|.$$
+We split the integral into two parts:
+$$\underbrace{\int_{|y| \leq \eta} |f(x-y) - f(x)| |\varphi_{\varepsilon}(y)| \, dy}_{I_1} + \underbrace{\int_{|y| > \eta} |f(x-y) - f(x)| |\varphi_{\varepsilon}(y)| \, dy}_{I_2}.$$
+We claim that $I_1 \leq A \delta$, where $A$ is independent of $\varepsilon$, and $I_2 \rightarrow 0$ as $\varepsilon \rightarrow 0$. Since $\left|f * \varphi_{\varepsilon}(x)-a f(x)\right| \leqslant I_1+I_2 \leqslant A \delta+I_2$, we have
+$$
+\limsup _{\varepsilon \rightarrow 0}\left|f * \varphi_{\varepsilon}(x)-a f(x)\right| \leq A \delta.
+$$
+As $\delta$ is arbitrary, we conclude that $\lim _{\varepsilon \rightarrow 0} f * \varphi_{\varepsilon}(x)=a f(x)$.
+To estimate $I_1$, let $K \in \mathbb{N}$ be fixed such that $2^K \leqslant \eta / \varepsilon < 2^{K+1}$ when $\eta / \varepsilon \geqslant 2$. We define the set $B(0, \eta)$ as follows:
+$$
+B(0, \eta) = 
+\begin{cases}
+B(0, 2^{-k} \eta) \cup \left(\bigcup_{i=1}^K \left\{ y \mid 2^{-i} \eta \leq |y| < 2 \cdot 2^{-i} \eta \right\}\right), & \text{if } \eta / \varepsilon \geqslant 2, \\
+B(0, \eta), & \text{if } \eta / \varepsilon < 2.
+\end{cases}
+$$
+Case 1: $\eta / \varepsilon < 2$. In this case, we have
+$$
+I_1 \leqslant c \varepsilon^{-n} \int_{B(0, \eta)}|f(x-y)-f(x)| \, dy \leqslant c \varepsilon^{-n} \delta \eta^n \leqslant c \delta.
+$$
+Case 2: $\eta / \varepsilon \geqslant 2$. On the $k$-th annulus, we estimate
+$$
+\left|\varphi_{\varepsilon}(y)\right| = \varepsilon^{-n}\left|\varphi\left(\varepsilon^{-1} y\right)\right| \leqslant C \varepsilon^{-n} \frac{1}{\left|\varepsilon^{-1} y\right|^{n+\varepsilon_0}} \leqslant C \varepsilon^{\varepsilon_0} \frac{1}{\left(2^k \eta\right)^{n+\varepsilon_0}}.
+$$
+On the ball $B\left(0, 2^{-k} \eta\right)$, we use the estimate $\left|\varphi_{\varepsilon}(y)\right| \leqslant C \varepsilon^{-n}$.
+Thus,
+$$
+\begin{aligned}
+I_1 &\leqslant \sum_{k=1}^K c \varepsilon^{\varepsilon_0} \frac{1}{\left(2^k \eta\right)^{n+\varepsilon_0}} \delta \left(2 \cdot 2^{-k} \eta\right)^n + c \varepsilon^{-n} \delta \left(2^{-K} \eta\right)^n \\
+&=c \delta \frac{\varepsilon^{\varepsilon_0}}{\eta^{\varepsilon_0}} \sum_{k=1}^K 2^{-k(n+\varepsilon_0-n)} + c \delta \left(2^{-K} \frac{\eta}{\varepsilon}\right)^n \\
+&= c \delta \frac{\varepsilon^{\varepsilon_0}}{\eta^{\varepsilon_0}} \sum_{k=1}^K 2^{-k\varepsilon_0} + c \delta \left(2^{-K} \frac{\eta}{\varepsilon}\right)^n \\
+&\leq c \delta \frac{\varepsilon^{\varepsilon_0}}{\eta^{\varepsilon_0}} \frac{1 - 2^{-K\varepsilon_0}}{1 - 2^{-\varepsilon_0}} + c \delta \\
+&\leq c \delta \frac{1}{1 - 2^{-\varepsilon_0}} + c \delta = A \delta
+\end{aligned}
+$$
+As for $I_2$, if $p'$ is the conjugate exponent to $p$ and $x = \textbf{1}_{\{|y|: |y| > \eta\}}$, by Hölder's inequality we have:
+$$
+\begin{aligned}
+I_2 &\leqslant \int (|f(x-y)| + |f(x)|) \left| \textbf{1}_{\{|y|: |y| > \eta\}} \varphi_{\varepsilon}(y) \right| dy \\
+&\leqslant \|f\|_p \left\| \textbf{1}_{\{|y|: |y| > \eta\}} \varphi_{\varepsilon} \right\|_{p'} + |f(x)| \left\| \textbf{1}_{\{|y|: |y| > \eta\}} \varphi_{\varepsilon} \right\|_1
+\end{aligned}
+$$
+It suffices to show $\left\| \textbf{1}_{\{|y| > \eta\}} \varphi_{\varepsilon} \right\|_q \rightarrow 0$ as $\varepsilon \rightarrow 0$.
+ If $q = \infty$, then
+$$
+\left\| 1_{\{|y| > \eta\}} \varphi_{\varepsilon} \right\|_{\infty} \leqslant \varepsilon^{-n} \frac{c}{(1 + \varepsilon^{-1} \eta)^{n+\varepsilon_0}} \leq C \eta^{-n-\varepsilon_0} \varepsilon^{\varepsilon_0} \rightarrow 0
+$$
+as $\varepsilon \rightarrow 0$.
+
+If $q < \infty$, then
+$$
+\begin{aligned}
+\left\| 1_{\{|y| > \eta\}} \varphi_{\varepsilon} \right\|_q^q &= \int_{|y| > \eta} \left| \varepsilon^{-n} \varphi\left(\varepsilon^{-1} y\right) \right|^q dy \\
+&= \varepsilon^{-nq} \int_{|z| \geqslant \frac{\eta}{\varepsilon}} |\varphi(z)|^q \cdot \varepsilon^n dz \\
+&\leq C \varepsilon^{n(1-q)} \int_{|z| \geqslant \frac{\eta}{\varepsilon}} \frac{1}{(1 + |z|)^{(n+\varepsilon_0)q}} dz \\
+&\leq C \varepsilon^{n(1-q)} \int_{r = \frac{\eta}{\varepsilon}}^{\infty} \frac{r^{n-1}}{(1 + r)^{(n+\varepsilon_0)q}} dr \\
+&\leq C \eta^{n - (n + \varepsilon_0)q} \varepsilon^{\varepsilon_0 q} \longrightarrow 0
+\end{aligned}
+$$
+as $\varepsilon \rightarrow 0$.
+\end{proof} 
+\begin{corollary}
+    Suppose $f \in L^1\left(\mathbb{R}^n\right)$ and $\hat{f} \geq 0$. If $f$ is continuous at 0, then $\hat{f} \in L^1$ and $f(x)=\int \hat{f}(\xi) e^{2 \pi i x \cdot \xi} d \xi$ almost everywhere. In particular, $f(0)=\int \hat{f}(\xi) d \xi$.
+\end{corollary}
+\begin{proof}
+     Since $f$ is continuous at 0, we have that $0 \in L_f$. Recall that
+$$
+\int \hat{f}(\xi) e^{2 \pi i x \cdot \xi} e^{-4 \pi^2 \varepsilon^2 |\xi|^2} d \xi=\int f * \varphi_{\varepsilon}(x) dx
+$$
+with $\varphi(x)=(4 \pi)^{-\frac{n}{2}} e^{-\frac{|x|^2}{4}}$ and $\varphi_{\varepsilon}(x) = \varepsilon^{-n} \varphi(x/\varepsilon)$. By a previous result , we have at $x=0$
+$$
+f(0)=\lim _{\varepsilon \rightarrow 0} \int f * \varphi_{\varepsilon}(0) dx = \lim _{\varepsilon \rightarrow 0} \int \hat{f}(\xi) e^{-4 \pi^2 \varepsilon^2|\xi|^2} d \xi
+$$
+Hence,
+$$
+\|\hat{f}\|_1=\int \hat{f}(\xi) d\xi = \int \lim_{\varepsilon \rightarrow 0} \hat{f}(\xi) e^{-4 \pi^2 \varepsilon^2|\xi|^2} d \xi \leq \liminf _{\varepsilon \rightarrow 0} \int \hat{f}(\xi) e^{-4 \pi^2 \varepsilon^2|\xi|^2} d \xi=f(0)<\infty
+$$
+thus $\hat{f} \in L^1$. By the Dominated Convergence Theorem (D.C.T.), 
+$$
+f(0)=\int \lim _{\varepsilon \rightarrow 0} \hat{f}(\xi) e^{-4 \pi^2 \varepsilon^2|\xi|^2} d \xi=\int \hat{f}(\xi) d \xi
+$$
+\end{proof}
+Now, let's proceed to define the Fourier Transform on $L^2$.
+\begin{theorem}
+    If $f \in L^1 \cap L^2$, then $\|\hat{f}\|_2=\|f\|_2<\infty$ ($\hat{f} \in L^2$).
+\end{theorem}
+\begin{proof}
+    Let $g(x)=\overline{f(-x)}$. Then $h=f * g \in L^1$ ($\|h\|_1=\|f * g\|_1 \leq\|f\|_1\|g\|_1=\|f\|_1^2$).
+$h$ is bounded ($\|h\|_{\infty} \leq\|f\|_2\|g\|_2 = \|f\|_2^2$) and uniformly continuous.
+Thus $\hat{h}=\hat{f} * \hat{g}=\hat{f} \hat{g}=\hat{f} \overline{\hat{f}}=|\hat{f}|^2 \geq 0$.
+By the previous corollary, $\hat{h} \in L^1$ and $h(0)=\int \hat{h}(\xi) d \xi$.
+We thus have $\int|\hat{f}|^2 d\xi = h(0) = f * g(0) = \int f(x) g(0-x) dx = \int f(x) \overline{f(x)} dx = \int|f|^2 dx$.
+
+\end{proof}
+\begin{theorem}
+    Let $f \in L^2(\mathbb{R}^n)$ and $\left\{g_n\right\} \subset L^1(\mathbb{R}^n) \cap L^2(\mathbb{R}^n)$ with $g_n \rightarrow f$ in $L^2(\mathbb{R}^n)$. Then $\hat{g}_n$ converges to a function $\mathcal{F}f$ in $L^2(\mathbb{R}^n)$. $\mathcal{F}f$ is independent of the particular sequence $\{g_n\}$ and $\mathcal{F}f$ is called the $L^2$ Fourier transform of $f$ on $L^2(\mathbb{R}^n)$.
+The Fourier transform on $L^2(\mathbb{R}^n)$ will be denoted by $\mathcal{F}$, and we shall use the notation $\hat{f}=\mathcal{F}f$ whenever $f \in L^2(\mathbb{R}^n)$.
+\end{theorem}
+\begin{proof}
+We have
+$\left\|\hat{g}_n-\hat{g}_m\right\|_2 = \left\|(g_n-g_m)^\wedge\right\|_2 = \left\|g_n-g_m\right\|_2 \rightarrow 0$as $m, n \rightarrow \infty$.
+Thus $\{\hat{g}_n\}$ is an Cauchy sequence in $L^2(\mathbb{R}^n)$. Then there exists an $L^2(\mathbb{R}^n)$ function, denoted by $\mathcal{F}f$, such that $\hat{g}_n \xrightarrow{L^2} \mathcal{F}f$.
+Assume $\{g_n\}$ and $\{\widetilde{g}_n\}$ both converge to $f$ in $L^1(\mathbb{R}^n) \cap L^2(\mathbb{R}^n)$ with respect to the $L^2$-norm.
+Consider the sequence $\{g_1, \tilde{g}_1, g_2, \tilde{g}_2, \ldots, g_n, \tilde{g}_n, \ldots\}$ in $L^1(\mathbb{R}^n) \cap L^2(\mathbb{R}^n)$ converging to $f$ in $L^2(\mathbb{R}^n)$.
+Hence, there exists $h \in L^2(\mathbb{R}^n)$ such that $\{\hat{g}_1, \hat{\tilde{g}}_1, \ldots, \hat{g}_n, \widehat{\tilde{g}}_n, \ldots\} \xrightarrow{L^2} h$.
+Both $\hat{g}_n \xrightarrow{L^2} h$ and $\widehat{\tilde{g}}_n \xrightarrow{L^2} h$ converge to the same function in $L^2(\mathbb{R}^n)$. 
+\end{proof}
+\begin{theorem}[The Plancherel Theorem]
+   For any function $f$ in the space $L^2(\mathbb{R}^n)$, the Fourier transform $\mathcal{F}f$ satisfies the equality $\|\mathcal{F}f\|_2 = \|f\|_2$.
+\end{theorem}
+\begin{proof}
+Assume we have a sequence of functions $g_n$ that converge to $f$ in the $L^2$ norm, and each $g_n$ belongs to the intersection of $L^1(\mathbb{R}^n)$ and $L^2(\mathbb{R}^n)$. Then, the Fourier transforms $\hat{g}_n$ converge to $\mathcal{F}f$ in the $L^2$ norm.\\
+Since the Fourier transform preserves the $L^2$ norm for each $g_n$, i.e., $\|\hat{g}_n\|_2 = \|g_n\|_2$, we can take the limit as $n$ approaches infinity to obtain $\|\mathcal{F}f\|_2 = \|f\|_2$.
+\end{proof}
+\begin{corollary}
+    The Fourier transform $\mathcal{F}$ is injective.
+\end{corollary}
+Then we will show $\mathcal{F}$ be a linear operator. For all $f, g \in L^2(\mathbb{R}^n)$, there exist sequences ${f_n}$ and ${g_n}$ such that $f_n$ converges to $f$ in $L^2$, $g_n$ converges to $g$ in $L^2$, and $f_n \cdot g_n$ belongs to both $L^1(\mathbb{R}^n)$ and $L^2(\mathbb{R}^n)$. We have that:
+$$\mathcal{F}f = \lim_{{n \to \infty} } \hat{f}_n \quad \mathcal{F}g = \lim_{{n \to \infty} } \hat{g}_n$$
+Consequently, the linearity of $\mathcal{F}$ is established as follows:
+$$\begin{aligned}
+    \mathcal{F}(f+g) &= \lim_{{n \to \infty} \atop {\text{in } L^2}} \widehat{f_n + g_n}
+&= \lim_{{n \to \infty} \atop {\text{in } L^2}} (\hat{f}_n + \hat{g}_n)
+&= \lim_{{n \to \infty} \atop {\text{in } L^2}} \hat{f}_n + \lim_{{n \to \infty} \atop {\text{in } L^2}} \hat{g}_n
+&= \mathcal{F}f + \mathcal{F}g
+\end{aligned}$$
+Thereby, we conclude that $\mathcal{F}$ is a unique bounded linear operator mapping from $L^2(\mathbb{R}^n)$ into $L^2(\mathbb{R}^n)$. Additionally, for any function $f$ that belongs to both $L^1(\mathbb{R}^n)$ and $L^2(\mathbb{R}^n)$, $\mathcal{F}f$ is equivalent to its Fourier transform $\hat{f}$.
+
+To demonstrate uniqueness, let us assume the existence of two distinct bounded linear operators, $F_1$ and $F_2$, both defined on $L^2(\mathbb{R}^n)$ with values in $L^2(\mathbb{R}^n)$. Furthermore, let these operators satisfy the property that for all functions $f$ in the intersection of $L^1(\mathbb{R}^n)$ and $L^2(\mathbb{R}^n)$, $F_i f = \hat{f}$ for $i = 1,2$.
+
+For any function $g$ in $L^2(\mathbb{R}^n)$, we can construct a sequence ${g_n}$ belonging to the intersection of $L^1(\mathbb{R}^n)$ and $L^2(\mathbb{R}^n)$ such that $g_n$ approaches $g$ in the $L^2$ norm. Now, considering the differences between $F_1 g$ and $F_2 g$ in the $L^2$ norm, we have:
+$$\|F_1 g - F_2 g\|_2 \leqslant \|F_1 g - F_1 g_n\|_2 + \|F_1 g_n - F_2 g_n\|_2 + \|F_2 g_n - F_2 g\|_2$$
+The middle term, $\|F_1 g_n - F_2 g_n\|_2$, vanishes since both operators agree on $g_n$ (by our assumption). Thus,
+$$\|F_1 g - F_2 g\|_2 \leqslant c\|g - g_n\|_2 + c'\|g_n - g\|_2$$
+for some constants $c$ and $c'$ depending on the boundedness of the operators. As $n$ approaches infinity, this expression tends to zero, implying the equality of $F_1$ and $F_2$. This establishes the uniqueness of the operator $\mathcal{F}$.
+\begin{proposition}
+    The Fourier transform $\mathcal{F}: L^2 \rightarrow L^2$ is surjective.
+\end{proposition}
+\begin{proof}
+    Since $\mathcal{F}$ is an isometry, its range $R(\mathcal{F})$ constitutes a closed subspace of $L^2$ (as established in Claim 1). Furthermore, the Schwartz space $S$ is contained within $R(\mathcal{F})$ (as shown in Claim 2). Therefore, the image of $\mathcal{F}$ is indeed the entirety of $L^2$.
+
+\noindent\textbf{Claim 1}:\\
+Consider a sequence $\{\mathcal{F} f_n\}$ in $R(\mathcal{F})$ where $f_n \in L^2$ and $\mathcal{F} f_n$ converges to $g$ in the $L^2$ norm. We can deduce that $\{\mathcal{F} f_n\}$ is a Cauchy sequence in $L^2$. Consequently, $\{f_n\}$ is also a Cauchy sequence in $L^2$ and converges to some $f \in L^2$. By continuity of $\mathcal{F}$, we have $\mathcal{F} f_n \rightarrow \mathcal{F} f$ in $L^2$ and thus $g = \mathcal{F} f$. This establishes that $g$ belongs to $R(\mathcal{F})$.
+
+\noindent\textbf{Claim 2}:\\
+It is a known fact that the \textbf{Fourier transform maps the Schwartz space $S$ onto itself bijectively.}
+To elaborate, if $f$ belongs to $S$, then it is both integrable and bounded. For any multi-indices $\alpha$ and $\beta$, the function $\widehat{D^\alpha(x^\beta f)}$ is bounded since $D^\alpha(x^\beta f)$ also belongs to $S$. We have the identity $\widehat{D^\alpha(x^\beta f)} = C_{\alpha, \beta} \xi^\alpha D^\beta \hat{f}$ which implies that $\xi^\alpha D^\beta \hat{f}$ is bounded. This, in turn, means that $\hat{f}$ belongs to $S$.
+
+The injectivity of $\mathcal{F}$ on $S$ follows from the fact that if $f_1, f_2 \in S$ and $\mathcal{F} f_1 = \mathcal{F} f_2$, then $f_1$ and $f_2$ must be equal almost everywhere. Hence, they are equivalent.
+
+To show the surjectivity of $\mathcal{F}$ on $S$, consider any $f \in S$. Define $F(x) = f(-x)$ and let $g = \hat{F}$. It can be shown that $g$ belongs to $S$ and that $\hat{g}(\xi) = f(\xi)$. This demonstrates that $\mathcal{F}$ is surjective onto $S$.
+\end{proof}
+\begin{theorem}
+    The Fourier transform is a unitary operator on $L^2$. \\
+    \noindent\textbf{Unitary}: A linear operator on $L^2$ that is an isometry and maps onto $L^2$.
+\end{theorem}
+\begin{corollary}
+    The Fourier transform on $L^2$ preserves inner products: $\langle\mathcal{F}f, \mathcal{F}g\rangle = \langle f, g\rangle$ for all $f, g \in L^2$.
+\end{corollary}
+\begin{proof}
+    By the polarization identity, we have
+$$
+\langle f, g\rangle = \int_{\mathbb{R}^n} f \bar{g} = \frac{1}{4}\left(\|f+g\|_2^2 - \|f-g\|_2^2 + i\|f+ig\|_2^2 - i\|f-ig\|_2^2\right).
+$$
+Since $\mathcal{F}$ is an isometry, it follows that $\|\mathcal{F}f\|_2 = \|f\|_2$ for all $f \in L^2$. Therefore, applying the polarization identity to $\mathcal{F}f$ and $\mathcal{F}g$, we obtain
+$$
+\langle \mathcal{F}f, \mathcal{F}g\rangle = \frac{1}{4}\left(\|\mathcal{F}f+\mathcal{F}g\|_2^2 - \|\mathcal{F}f-\mathcal{F}g\|_2^2 + i\|\mathcal{F}f+i\mathcal{F}g\|_2^2 - i\|\mathcal{F}f-i\mathcal{F}g\|_2^2\right) = \langle f, g\rangle.
+$$
+This completes the proof that the Fourier transform preserves inner products on $L^2$.
+\end{proof}
+\begin{theorem}
+    The inverse of the Fourier transform, denoted by $\mathcal{F}^{-1}$, can be obtained by letting $(\mathcal{F}^{-1}g)(x) = (\mathcal{F}g)(-x)$ for all $g \in L^2(\mathbb{R}^n)$.
+\end{theorem}
+\begin{proof}
+    Suppose first that $g \in S(\mathbb{R}^n)$, the Schwartz space of rapidly decreasing functions. Then there exists $f \in S(\mathbb{R}^n)$ such that $g = \hat{f}$, where $\hat{f}$ denotes the Fourier transform of $f$. By the Fourier inversion formula for functions in the Schwartz space, we have
+$$
+f = \mathcal{F}^{-1}g = (\hat{f})^\vee = \hat{g}(-x) = (\mathcal{F}g)(-x).
+$$
+This shows that $(\mathcal{F}^{-1}g)(x) = (\mathcal{F}g)(-x)$ holds for all $g \in S(\mathbb{R}^n)$.
+
+Now let $g \in L^2(\mathbb{R}^n)$ be arbitrary. By density of the Schwartz space in $L^2(\mathbb{R}^n)$, there exists a sequence $\{g_k\}$ in $S(\mathbb{R}^n)$ such that $g_k \to g$ in $L^2$ as $k \to \infty$. Using the triangle inequality and the fact that $\mathcal{F}$ is an isometry on $L^2$, we have
+$$
+\begin{aligned}
+&\|(\mathcal{F}g)(-x) - \mathcal{F}^{-1}g(x)\|_{L^2} \\
+&\leq \|(\mathcal{F}g)(-x) - (\mathcal{F}g_k)(-x)\|_2 + \|(\mathcal{F}g_k)(-x) - \mathcal{F}^{-1}g_k(x)\|_2 + \|\mathcal{F}^{-1}g_k(x) - \mathcal{F}^{-1}g(x)\|_2 \\
+&= \|g - g_k\|_2 + 0 + \|g_k - g\|_2 \to 0 \text{ as } k \to \infty.
+\end{aligned}
+$$
+This shows that $(\mathcal{F}g)(-x) = \mathcal{F}^{-1}g(x)$ almost everywhere, completing the proof.
+\end{proof}
+If a function $f$ can be expressed as the sum of two functions $f_1$ and $f_2$ where $f_1$ belongs to $L^1$ and $f_2$ belongs to $L^2$, then we write $f = f_1 + f_2$. In this case, we define the Fourier transform of $f$ as $\hat{f} = \hat{f}_1 + \hat{f}_2$.
+
+\textbf{Well-definedness}: Suppose we have another decomposition of $f$ as $g_1 + g_2$ where $g_1 \in L^1$ and $g_2 \in L^2$. Then, it follows that $f_1 + f_2 = g_1 + g_2$. Rearranging this equation, we obtain $f_1 - g_1 = g_2 - f_2$. Since both $L^1$ and $L^2$ are linear spaces, the difference $f_1 - g_1$ belongs to $L^1$ and the difference $g_2 - f_2$ belongs to $L^2$. Therefore, the Fourier transform of $f_1 - g_1$ exists and is equal to the Fourier transform of $g_2 - f_2$. This implies that $\hat{f}_1 + \hat{f}_2 = \hat{g}_1 + \hat{g}_2$, showing that the definition of the Fourier transform for functions in $L^1 + L^2$ is well-defined.
+
+\begin{definition}
+    For $1 \leq p \leq 2$, since $L^p \subset L^1 + L^2$, we can apply the above definition to functions in $L^p$.
+\end{definition}
