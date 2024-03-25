@@ -1,0 +1,92 @@
+\usepackage[a4paper,left=20mm,right=20mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{ctex}
+\usepackage{lipsum}
+\usepackage{amsmath, amsthm, amssymb, amsfonts,mathrsfs,pifont}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz-cd}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{breakable}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!5}
+\colorlet{LightGreen}{Green!5}
+\colorlet{Lightblue}{Blue!5}
+\colorlet{Lightpurple}{Purple!5}
+\colorlet{LightRed}{Red!5}
+\colorlet{LightYellow}{Yellow!5}
+\colorlet{LightCyan}{Cyan!5}
+
+\theoremstyle{plain}
+
+
+\theoremstyle{definition}
+\newtheorem*{rmk}{Remark}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray,breakable,before upper app={\setlength{\parindent}{2em}}}
+\declaretheoremstyle[name=Definition,]{thmsty}
+\declaretheorem[style=thmsty,sibling=theorem]{definition}
+\tcolorboxenvironment{definition}{colback=LightCyan,breakable,before upper app={\setlength{\parindent}{2em}}}
+\declaretheoremstyle[name=Lemma,]{thmsty}
+\declaretheorem[style=thmsty,sibling=theorem]{lemma}
+\tcolorboxenvironment{lemma}{colback=Lightblue,breakable,before upper app={\setlength{\parindent}{2em}}}
+
+\declaretheoremstyle[name=Corollary,]{thmsty}
+\declaretheorem[style=thmsty,sibling=theorem]{corollary}
+\tcolorboxenvironment{corollary}{colback=Lightpurple,breakable,before upper app={\setlength{\parindent}{2em}}}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,sibling=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange,breakable,before upper app={\setlength{\parindent}{2em}}}
+
+\declaretheoremstyle[name=Example,]{prosty}
+\declaretheorem[style=prosty,sibling=theorem]{example}
+\tcolorboxenvironment{example}{colback=LightGreen,breakable,before upper app={\setlength{\parindent}{2em}}}
+
+\usepackage{titling}
+\renewcommand*{\maketitle}{
+    \begin{titlepage}
+    \newgeometry{margin = 0in}
+    \parindent=0pt
+    \includegraphics[width=\linewidth]{cover1.jpg}  
+    \vfill
+    \begin{center}
+        \parbox{0.618\textwidth}{
+        \hfill {\bfseries \Huge \thetitle} \\[0.6pt]  
+        \rule{0.618\textwidth}{4pt} \\ 
+    }
+    \end{center}
+    \vfill
+    \begin{center}
+        \parbox{0.618\textwidth}{
+        \hfill\Large
+        \kaishu 
+          \begin{tabular}{r|}
+          Author：\theauthor \\ 
+          Time：\thedate \\
+        \end{tabular}
+        }
+    \end{center}
+    \vfill
+    \begin{center}
+        \parbox[t]{0.7\textwidth}{\centering \kaishu }
+    \end{center}
+    \vfill
+\end{titlepage}
+\restoregeometry
+\thispagestyle{empty}
+}
+
+\title{Harmonic Analysis}
+\author{Yitong Qiu}
+\date{Spring 2024}
